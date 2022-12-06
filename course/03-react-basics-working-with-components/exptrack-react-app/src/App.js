@@ -21,6 +21,8 @@ this code does not contain our source code but the whole React library source co
 // NB the rule that React applies: lowercase elements == built-in HTML elements; uppercase elements == custom React Components
 import Expenses from "./components/Expenses/Expenses";
 
+// NB you can also use arrow functions for writing function components!
+// const App = () => {}
 function App() {
   const expenses = [
     {

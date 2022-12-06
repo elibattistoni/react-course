@@ -40,6 +40,7 @@ by doing this you can keep every component on its own, relatively small and mana
 so we will isolate a component that renders the date in a calendar look --> ExpenseDate.js
 */
 
+// const ExpenseItem = (props) => {}
 function ExpenseItem(props) {
   //= props is an object that contains all the values of the attributes that we define when we call this custom component
   // the keys are the names of the attributes; the values are the relative values
