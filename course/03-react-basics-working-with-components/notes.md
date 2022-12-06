@@ -1,4 +1,4 @@
-# React Components
+# React Basics & Working with Components
 
 React = JS library for building user interfaces; it makes building complex, interactive, and reactive user interfaces, EASIER
 
