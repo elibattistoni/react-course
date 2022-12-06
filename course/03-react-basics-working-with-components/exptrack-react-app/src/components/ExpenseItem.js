@@ -4,6 +4,7 @@
 //==============================================================================
 //# CSS styling
 //==============================================================================
+import Card from "./Card";
 import ExpenseDate from "./ExpenseDate";
 import "./ExpenseItem.css"; // this simply tells the build process that this CSS file should be considered
 // NB in JSX you don't write class="" like in regular css but instead write className="" (because the wor class is a reserved work in JavaScript)
@@ -50,15 +51,31 @@ function ExpenseItem(props) {
   // i.e. <ExpenseDate date={props.date}></ExpenseDate> becomes <ExpenseDate date={props.date} />
 
   return (
-    <div className="expense-item">
+    <Card className="expense-item">
+      {/* NB careful when using className on your custom components: it is ok for
+      HTML elements, but your custom component only supports what you tell them to support.
+      So if you want to make sure that a class name can be set on you card component and
+      have the desired effect, we need to tweak the code in the card component
+      */}
       <ExpenseDate date={props.date} />
 
       <div className="expense-item__description">
         <h2>{props.title}</h2>
         <div className="expense-item__price">${props.amount}</div>
       </div>
-    </div>
+    </Card>
   );
 }
 
 export default ExpenseItem;
+
+/*
+<div className="expense-item">
+  <ExpenseDate date={props.date} />
+
+  <div className="expense-item__description">
+    <h2>{props.title}</h2>
+    <div className="expense-item__price">${props.amount}</div>
+  </div>
+</div>
+*/
