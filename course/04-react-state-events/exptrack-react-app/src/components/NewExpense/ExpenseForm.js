@@ -27,7 +27,7 @@ const ExpenseForm = () => {
 
   const titleChangeHandler = (event) => {
     // get the value the user is entering
-    console.log(event.target.value);
+    // console.log(event.target.value);
     // change state of enteredTitle with the current value
     //### MULTIPLE STATES: APPROACH 1
     setEnteredTitle(event.target.value);
@@ -57,12 +57,24 @@ const ExpenseForm = () => {
   const amountChangeHandler = (event) => {
     setEnteredAmount(event.target.value);
   };
+
   const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
   };
 
+  const submitHandler = (event) => {
+    event.preventDefault(); // prevent page from reloading (whenever a form is submitted -- it automatically sends a request to the server that is hosting the webpage -- in our case our dev server)
+
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+    console.log(expenseData);
+  };
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
