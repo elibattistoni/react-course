@@ -16,9 +16,10 @@ this code does not contain our source code but the whole React library source co
 //==============================================================================
 //# Import Custom Components
 //==============================================================================
-import ExpenseItem from "./components/ExpenseItem"; // NB once imported, you can use it just like an HTML element!
+// import ExpenseItem from "./components/ExpenseItem"; // NB once imported, you can use it just like an HTML element!
 // the key difference between the HTML of custom components and the HTML of regular elements is that the Custom Component HTML starts with uppercase letter so that react can detect that it is a custom component
 // NB the rule that React applies: lowercase elements == built-in HTML elements; uppercase elements == custom React Components
+import Expenses from "./components/Expenses";
 
 function App() {
   const expenses = [
@@ -46,24 +47,28 @@ function App() {
   return (
     <div>
       <h2>Let's get started!</h2>
-      //= props for sharing data between components
-      <ExpenseItem
-        title={expenses[0].title}
-        amount={expenses[0].amount}
-        date={expenses[0].date}
-      ></ExpenseItem>
-      <ExpenseItem
-        title={expenses[1].title}
-        amount={expenses[1].amount}
-        date={expenses[1].date}
-      ></ExpenseItem>
-      <ExpenseItem
-        title={expenses[2].title}
-        amount={expenses[2].amount}
-        date={expenses[2].date}
-      ></ExpenseItem>
+      {/* props for sharing data between components */}
+      <Expenses items={expenses} />
     </div>
   );
 }
 
 export default App;
+
+/*
+<ExpenseItem
+  title={expenses[0].title}
+  amount={expenses[0].amount}
+  date={expenses[0].date}
+></ExpenseItem>
+<ExpenseItem
+  title={expenses[1].title}
+  amount={expenses[1].amount}
+  date={expenses[1].date}
+></ExpenseItem>
+<ExpenseItem
+  title={expenses[2].title}
+  amount={expenses[2].amount}
+  date={expenses[2].date}
+></ExpenseItem>
+*/
