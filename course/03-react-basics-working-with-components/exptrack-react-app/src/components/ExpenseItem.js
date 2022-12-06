@@ -6,12 +6,20 @@ import "./ExpenseItem.css"; // this simply tells the build process that this CSS
 // NB in JSX you don't write class="" like in regular css but instead write className="" (because the wor class is a reserved work in JavaScript)
 
 function ExpenseItem() {
+  const expenseDate = new Date(2021, 2, 28); // NB this is just regular Javascript (and we typically do have JS code in our components)
+  console.log("expenseDate", expenseDate);
+  // it could be any kind of code (e.g. HTTP request to fetch data deom a database to validate user input)
+
+  const expenseTitle = "Car Insurance";
+  const expenseAmount = 294.67;
+
+  //NB in the JSX you wrap these variables inside {} inside which you can also run basic JS expressions
   return (
     <div className="expense-item">
-      <div>Date</div>
+      <div>{expenseDate.toISOString()}</div>
       <div className="expense-item__description">
-        <h2>Title</h2>
-        <div className="expense-item__price">Amount</div>
+        <h2>{expenseTitle}</h2>
+        <div className="expense-item__price">${expenseAmount}</div>
       </div>
     </div>
   );
