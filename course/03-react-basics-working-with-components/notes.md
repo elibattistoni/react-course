@@ -29,3 +29,5 @@ execute the commands to create a react application, from this folder:
 $ npx create-react-app try-create-app
 $ cd try-create-app
 $ npm start
+
+This was just a demonstration of how to create a React App. The starting material of the preoject app "exptrack-react-app" is the teacher code.
