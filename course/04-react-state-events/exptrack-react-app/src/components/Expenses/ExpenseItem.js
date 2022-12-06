@@ -8,11 +8,12 @@ const ExpenseItem = (props) => {
   // NB it is a convention to name the functions that have to be triggered upon an event with eventName + Handler
   // so that it is clear that it is a function that is not called by us somewhere in the code
   // but that it is a function that is attached to an event listener so that it is called by react once the event occurs
-  //= 1. REACTIVE: reacting to events
+  //= 1. reacting to events
   // const clickHandler = () => {
   //   console.log("Clicked!");
   // };
-  //= 2. REACTIVE: changing what shows up on the screen: the concept of STATE
+  //= 2. changing what shows up on the screen: the concept of STATE
+  //= it is the STATE that adds reactivity to our application; without state, the user interface would never change
   // let title = props.title;
   //const clickHandler = () => {
   // title = "UPDATED TITLE!";
@@ -41,10 +42,19 @@ const ExpenseItem = (props) => {
   with useState we create a special kind of variable (NB a variable where changes will lead this component function to be called again)
   useState returns something: 1) it gives access to this special variable, and 2) it also returns a function that we can call to assign a new value to that variable
   it returns an array: the first element is the variable/element itself and the second element is the updating function
+
+  IMPORTANT VERY
+  # useState registers some value as a state for the component in which it is being called
+  # specifically, it registrs it for a specific component instance (i.e. if a component is used many times -- here, in Expenses.js, 4 times -- every component instance receives its own state)
   */
   const [title, setTitle] = useState(props.title); // React Hook, function that allows us to define some values as state
   // title is a pointer to the managed value (therefore initally at props.title)
   //NB BEST PRACTICE naming convention: [title, setTitle]
+  // using const is fine because we never re-assign the title variable with title = ... but it is react that manages its value for us
+  // IMPORTANT React keeps track of when we call useState in a given component instance for the first time
+  /// when a component is re-executed because the state changed, React will not re-initialize the state, therefore it will not re-assign title to props.title
+  /// instead, it will detect that this State had been initialized in the past, and it will just grab the latest state (based on the state update) and return that updated state to us
+
   const clickHandler = () => {
     // state updating function:
     setTitle("Updated!"); // NB now the component is re-evaluated!
@@ -73,3 +83,11 @@ const ExpenseItem = (props) => {
 };
 
 export default ExpenseItem;
+
+/*
+about STATE
+Thus far, we update our state upon user events (e.g. upon a click).
+That's very common but not required for state updates! You can update states for whatever reason you may have.
+Later in the course, we'll see Http requests that complete (where we then want to update the state 
+  based on the Http response we got back) but you could also be updating state because a timer (set with setTimeout()) expired for example.
+*/
