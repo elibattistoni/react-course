@@ -9,6 +9,18 @@ import "./ExpenseForm.css";
 // onChange --> does the same: it triggers on every keystroke but the advantage of the onChange event is that we can e.g. use the same event for all input types (e.g. also for dropdowns)
 // NB these props under the hood add event listeners
 
+//==============================================================================
+//# Clear fields after submission: two-way binding
+//==============================================================================
+/*
+by using state, we can have access to and implement the "two-way binding"
+i.e. we don't simply listen for changes of the inputs, but we can also pass a value back into the input so that we can reset or change the input programmtically
+all we have to do is to add the value="" attribute to the input element
+
+/ two way binding because now we don't just listen to changes in the input to update our state, but we also feed the state back into the input so that when we change the state, we also change input
+// the advantage is that when in the submitHandler() function we can now set the input back to empty strings
+*/
+
 const ExpenseForm = () => {
   //### MULTIPLE STATES: APPROACH 1
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -71,6 +83,11 @@ const ExpenseForm = () => {
       date: new Date(enteredDate),
     };
     console.log(expenseData);
+
+    /// clear the input
+    setEnteredTitle("");
+    setEnteredAmount("");
+    setEnteredDate("");
   };
 
   return (
@@ -78,7 +95,12 @@ const ExpenseForm = () => {
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" onChange={titleChangeHandler} />
+          <input
+            type="text"
+            value={enteredTitle}
+            onChange={titleChangeHandler}
+          />
+          {/* with value you add the two-way binding */}
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
@@ -86,6 +108,7 @@ const ExpenseForm = () => {
             type="number"
             min="0.01"
             step="0.01"
+            value={enteredAmount}
             onChange={amountChangeHandler}
           />
         </div>
@@ -95,6 +118,7 @@ const ExpenseForm = () => {
             type="date"
             min="2019-01-01"
             max="2022-12-31"
+            value={enteredDate}
             onChange={dateChangeHandler}
           />
         </div>
