@@ -19,7 +19,7 @@ this code does not contain our source code but the whole React library source co
 // import ExpenseItem from "./components/ExpenseItem"; // NB once imported, you can use it just like an HTML element!
 // the key difference between the HTML of custom components and the HTML of regular elements is that the Custom Component HTML starts with uppercase letter so that react can detect that it is a custom component
 // NB the rule that React applies: lowercase elements == built-in HTML elements; uppercase elements == custom React Components
-import Expenses from "./components/Expenses";
+import Expenses from "./components/Expenses/Expenses";
 
 function App() {
   const expenses = [

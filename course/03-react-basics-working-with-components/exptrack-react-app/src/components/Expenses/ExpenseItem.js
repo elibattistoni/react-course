@@ -4,7 +4,7 @@
 //==============================================================================
 //# CSS styling
 //==============================================================================
-import Card from "./Card";
+import Card from "../UI/Card";
 import ExpenseDate from "./ExpenseDate";
 import "./ExpenseItem.css"; // this simply tells the build process that this CSS file should be considered
 // NB in JSX you don't write class="" like in regular css but instead write className="" (because the wor class is a reserved work in JavaScript)
