@@ -8,3 +8,6 @@
 Static applications = when the state never changes
 
 You want to have applications that are interactive, so that you can react to clicks by the user and to data being entered by the user and which are reactive, so that the application also changes when certain things happen.
+
+## Continuing with the application: Adding form inputs
+- create a new folder in the components folder, names "NewExpense" which will contain the components about gathering the input for a new expense
