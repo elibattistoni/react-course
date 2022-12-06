@@ -3,6 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App"; // do not write from "./App.js"
 
+//==============================================================================
+//# INTRODUCTION
+//==============================================================================
 /*
 NB the .createRoot() method creates the main entry point (the main hook) of the overall user interface that we are about to build with React
 this method tells react where the react application (i.e. the user interface) should be placed in the webpage that is loaded

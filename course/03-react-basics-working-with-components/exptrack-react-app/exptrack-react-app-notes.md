@@ -6,3 +6,7 @@
         "react": "^18.0.0"
         "react-dom": "^18.0.0"
     these two dependencies work together to form the React library
+- see the files *index.js* and *App.js* for notes
+- IMPORTANT BEST PRACTICE write new components in new files (this means that in a React project you will end up with dozens or hundreds of files because on React project you will have dozens or hundreds of Components -- but this is normal); to organize the files a bit, in the src/ folder add a components/ folder which will hold all the components source files (IMPORTANT we do not move App.js because it is a special Component in terms of its role in the application -- it is our **root component** i.e. the main Component being rendered in the starting file index.js) and all other components will be either nested inside of App.js or nested inside other components -- NB ultimately with React we build a **COMPONENT TREE**
+- inside the /components folder add a new file named ExpenseItem.js (NB naming convention: first letter is uppercase + CamelCase)
+- NB IMPORTANT how is a Component written in React? It is just a function: **a React Component is just a JavaScript function**, **a special kind of function because it returns JSX code, but it is just a JavaScript function**.
