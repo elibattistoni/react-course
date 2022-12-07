@@ -47,3 +47,31 @@ const App = () => {
 };
 
 export default App;
+
+/*
+we are getting this warning:
+
+/Warning: Each child in a list should have a unique "key" prop.
+/
+/Check the render method of `Expenses`. See https://reactjs.org/link/warning-keys for more information.
+/    at ExpenseItem (http://localhost:3000/static/js/bundle.js:244:19)
+/    at Expenses (http://localhost:3000/static/js/bundle.js:345:90)
+/    at div
+/    at App (http://localhost:3000/static/js/bundle.js:52:82)
+
+# when it comes to rendering lists of data, React has a special concept that exists
+# to ensure that React can update and render these lists efficiantly wihtout performance losses or bugs
+NB what happens with is error is the following:
+# (look at the HTML strucutre in the developer tools when you add a new item)
+# when we add a new item, React renders this new item as the last item in the list of divs
+# then updates all items and replaces their content such that it matches the order of our items in our array
+This happens because to React all these items look similar
+and it only sees that our array changed (that now it is longer than before).
+So it simply renders an additional div and adds it at the end.
+Then React walks through all the items and updates the content inside of every item to match the Array content again.
+The final result is correct but not optimal in terms of performance and it leads to bugs (if the ExpenseItem was a stateful item, the state changes will be lost because the itema are overwritten)
+
+NB we get this warning because we have a way of telling React where an item should be added; so in the Expenses.js file, when you call ExpenseItem, you add a key prop
+NB you can always add the key prop (always i.e. to both built-in HTML elements and custom components)
+NB with this prop you can help React identify the individual items, and its value should be a unique value (e.g. expense id because in our array every expense item has a unique id)
+*/
