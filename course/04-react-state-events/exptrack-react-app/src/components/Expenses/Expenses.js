@@ -21,6 +21,8 @@ const Expenses = (props) => {
           selected={filteredYear}
         />
         {/* do this -- selected={filteredYear} -- because when refreshing otherwise it will be set to another number, i.e. 2022 */}
+        {/* NB ExpensesFilter is called "controlled component" because the logics of ExpensesFilter are controlled in the parent component Expenses */}
+        {/* i.e. both the value and changes to the value are not handled in the component itself but in a parent component */}
         <ExpenseItem
           title={props.items[0].title}
           amount={props.items[0].amount}
