@@ -102,6 +102,8 @@ const ExpenseForm = (props) => {
     # and inside this submitHandler we can access props.onSaveExpenseData and execute it here
     # we then need to communicate up, from inside NewExpense to App (because it is the App component which needs the new expense in order to add it to the expenses array)
     # in the App component define the addExpenseHandler
+    NB to sum up: very important concept of moving data from a child to a parent component by using props to receive a function from the parent component which we call in the child component
+    NB Lifting State Up (closely related concept, see bottom of this script)
     */
     props.onSaveExpenseData(expenseData);
 
@@ -152,3 +154,25 @@ const ExpenseForm = (props) => {
 };
 
 export default ExpenseForm;
+
+/*
+= Lifting state up
+concept that is closely related to the passage of data from child to parent
+when we pass data from the ExpenseForm component to the NewExpense component, we lift the state up, and we lift the state up further when we pass data from the NewExpense component to the App component
+ultimately, we need to pass the data generated in ExpenseForm--NewExpense to the Expenses component in order to be added to the list of expenses
+these 2 components (NewExpense and Expenses) are not directly related,
+but they have a common parent, i.e. the App component (the App component is therefore the "closest involved component")
+# we can store our stete in the "closest involved component" 
+# (i.e. the App component, which is the parent component that has access to both involved components) by LIFTING OUR STATE UP
+# i.e. by passing our generated state data from the NewExpense component to the App component
+# and this is what we already doing in our application by using props, 
+# by calling the function that we receive on the onAddExpense prop: 
+NB just calling the function that we receive through props is not lifting the state up
+# importantly, we pass data to the function that we call in NewExpense 
+#(the function is props.onAddExpense(expenseData)) and by passing that data, we are lifting that data, we are lifting that state up
+(in the next course section we will manage the whole expenses array in App.js as state and we are going to add the expense to that array)
+# we are already passing down that array to the expenses component (that is the other part of liting the state up)
+= we are passing data up to each parent's component because either we need that
+= data directly in the App component or (like in our case and it is very common) because we then want to pass that data down to another component via props
+NB the goal is to lift the state up just ad high as necessary in the Component Tree until you have a component which has access to the components that generate data or need data
+*/
