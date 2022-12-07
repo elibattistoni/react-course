@@ -1,0 +1,3 @@
+# CSS Scoping
+So far we have used regular CSS with regular CSS selectors:
+even if we are importing a css file e.g. **CourseGoalList.css** in the **CourseGoulaList.js** and using the className "goal-list" for styling the list component, this css is not scoped: if on the webpage other components (that are not the CourseGoalList component) are styled with the "goal-list" className, they will be affected because this css class is not scoped to the CourseGoalList component (it would affect any element on the entire page (**downstream of the import**))
