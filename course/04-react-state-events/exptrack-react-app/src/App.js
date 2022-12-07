@@ -1,5 +1,3 @@
-// import React from 'react'; // NB old react syntax
-
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
@@ -25,14 +23,6 @@ const App = () => {
       date: new Date(2021, 5, 12),
     },
   ];
-
-  // NB old react syntax
-  // return React.createElement(
-  //   'div',
-  //   {},
-  //   React.createElement('h2', {}, "Let's get started!"),
-  //   React.createElement(Expenses, { items: expenses })
-  // );
 
   const addExpenseHandler = (expense) => {
     console.log("in App.js");
