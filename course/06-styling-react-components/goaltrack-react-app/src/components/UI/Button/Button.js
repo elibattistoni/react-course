@@ -37,6 +37,7 @@ const Button = styled.button`
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
   }
 `;
+// NB get rid of the selectors (see Button.css to understand)
 // this returns a button with these styles
 //NB the button that is returned also applies by default all the props that you might be passing to your Button component which in the end we export
 //IMPORTANT if you inspect the HTMl you will see that the button will have a strange class: this class is generated automatically (dynamically) by the Styled Components package and it ensures (since it has a weird name)
