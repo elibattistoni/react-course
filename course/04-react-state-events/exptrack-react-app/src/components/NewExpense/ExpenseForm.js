@@ -21,7 +21,7 @@ all we have to do is to add the value="" attribute to the input element
 // the advantage is that when in the submitHandler() function we can now set the input back to empty strings
 */
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   //### MULTIPLE STATES: APPROACH 1
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState(""); // we can initialize all states as a string because by default whenever you listen to the change event for an input, if you read the value of that input element it will always be a string
@@ -77,14 +77,35 @@ const ExpenseForm = () => {
   const submitHandler = (event) => {
     event.preventDefault(); // prevent page from reloading (whenever a form is submitted -- it automatically sends a request to the server that is hosting the webpage -- in our case our dev server)
 
+    // gather inputted data when form submits
     const expenseData = {
       title: enteredTitle,
       amount: enteredAmount,
       date: new Date(enteredDate),
     };
-    console.log(expenseData);
+    // console.log(expenseData);
+    // NB however we need this data in App.js because there we want to add it to the array of expenses (+ we want to add an id)
+    // NB so we need to pass the data that we are collecting and gathering here, in the ExpenseForm component to the App component
+    // passing data from parent to child: you can do it with props
+    // but passing data from child to parent??
+    // IMPORTANT we can create our own event props on our components: this allowa us to pass a function from a parent component to a child component, and then call that function inside of the child component
+    /// and when we call that function, we can pass data as parameters
 
-    /// clear the input
+    /*
+    / VERY IMPORTANT: how to communicate / pass data between a child component and a parent component
+    # in practice: we want to pass the expenseData gathered here in ExpenseForm to the NewExpense component (in NewExpense.js)
+    # (you cannot skip the parent (NewExpense) and go directly to the grandparent (App) NB also when passing data from parent to child with props you cannot skip intermediate components)
+    # so in NewExpense.js, add when calling the ExpenseForm component a new prop named onSaveExpenseData and the value of this prop should be a function that will be triggered when something happens inside of the ExpenseForm component
+    # (in this case when the user saves the entered expense data, i.e. when submitting the form)
+    # and inside the NewExpense component you define the function that should be the value of onSaveExpenseData
+    # therefore here in this component the handler function is reachable by props.onSaveExpenseData
+    # and inside this submitHandler we can access props.onSaveExpenseData and execute it here
+    # we then need to communicate up, from inside NewExpense to App (because it is the App component which needs the new expense in order to add it to the expenses array)
+    # in the App component define the addExpenseHandler
+    */
+    props.onSaveExpenseData(expenseData);
+
+    // clear the input
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");

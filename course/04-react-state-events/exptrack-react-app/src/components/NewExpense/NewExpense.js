@@ -5,10 +5,21 @@ Here we want to render a form where users can enter their expense data
 import "./NewExpense.css";
 import ExpenseForm from "./ExpenseForm";
 
-const NewExpense = () => {
+const NewExpense = (props) => {
+  // NB handler to be called when submitting the ExpenseForm
+  // this is needed in order to pass data from a child (ExpenseForm) to a parent (NewExpense)
+  const saveExpenseDataHandler = (enteredExpenseData) => {
+    const expenseData = {
+      ...enteredExpenseData,
+      id: Math.random().toString(),
+    };
+    // console.log(expenseData);
+    props.onAddExpense(expenseData);
+  };
+
   return (
     <div className="new-expense">
-      <ExpenseForm />
+      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
     </div>
   );
 };
