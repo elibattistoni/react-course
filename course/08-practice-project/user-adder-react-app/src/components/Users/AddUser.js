@@ -1,3 +1,6 @@
+import Card from "../UI/Card";
+import classes from "./AddUser.module.css";
+
 const AddUser = (props) => {
   // handler function that should be executed when the for is submitted (i.e. onSubmit)
   const addUserHandler = (event) => {
@@ -6,13 +9,17 @@ const AddUser = (props) => {
   };
 
   return (
-    <form onSubmit={addUserHandler}>
-      <label htmlFor="username">Username</label>
-      <input type="text" id="username" />
-      <label htmlFor="age">Age (Years)</label>
-      <input type="number" id="age" />
-      <button type="submit">Add User</button>
-    </form>
+    <Card className={classes.input}>
+      {/* NB remember that on CUSTOM COMPONENTS we do not have a default className property, it is treated as a key of the props object */}
+      {/* therefore when defining the Card component in Card.js you have to make sure that it can receive classes from props.className */}
+      <form onSubmit={addUserHandler}>
+        <label htmlFor="username">Username</label>
+        <input type="text" id="username" />
+        <label htmlFor="age">Age (Years)</label>
+        <input type="number" id="age" />
+        <button type="submit">Add User</button>
+      </form>
+    </Card>
   );
 };
 
