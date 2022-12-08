@@ -45,6 +45,8 @@ const AddUser = (props) => {
     // this code should execute only if we have a valid user input
     console.log("form submitted!");
     console.log(enteredUsername, enteredAge);
+    const userData = { name: enteredUsername, age: enteredAge };
+    props.onSubmitUserData(userData);
     //============
     //# reset user input
     //============
