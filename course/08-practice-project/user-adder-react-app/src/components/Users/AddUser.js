@@ -29,8 +29,27 @@ const AddUser = (props) => {
   // handler function that should be executed when the for is submitted (i.e. onSubmit)
   const addUserHandler = (event) => {
     event.preventDefault();
+    //============
+    //# Validation
+    //============
+    // the user cannot submit the form if they have not entered anything
+    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+      // here we will add pop-up windows
+      return;
+    }
+    // the user cannot insert an age that is smaller than 1 (NB with + you convert the string to a number)
+    if (+enteredAge < 1) {
+      // here we will add pop-up windows
+      return;
+    }
+    // this code should execute only if we have a valid user input
     console.log("form submitted!");
     console.log(enteredUsername, enteredAge);
+    //============
+    //# reset user input
+    //============
+    setEnteredUsername("");
+    setEnteredAge("");
   };
 
   return (
@@ -39,9 +58,19 @@ const AddUser = (props) => {
       {/* therefore when defining the Card component in Card.js you have to make sure that it can receive classes from props.className */}
       <form onSubmit={addUserHandler}>
         <label htmlFor="username">Username</label>
-        <input type="text" id="username" onChange={usernameChangeHandler} />
+        <input
+          type="text"
+          id="username"
+          onChange={usernameChangeHandler}
+          value={enteredUsername}
+        />
         <label htmlFor="age">Age (Years)</label>
-        <input type="number" id="age" onChange={ageChangeHandler} />
+        <input
+          type="number"
+          id="age"
+          onChange={ageChangeHandler}
+          value={enteredAge}
+        />
         <Button type="submit">Add User</Button>
         {/* <button type="submit">Add User</button> */}
       </form>
