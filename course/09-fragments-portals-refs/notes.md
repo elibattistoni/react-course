@@ -29,3 +29,9 @@ or
 `<>...</>` (this shortcut depends on the project setup because the workflow needs to support this)
 
 The Wrapper component was simply done jsut to understand what these builtin wrappers do.
+
+# React Portals
+**Fragments** allow us to write cleaner code, to end up with less unnecessary HTML elements on the final page. **React portals** are another useful feature, which also help us write cleaner code.
+
+NB when you have a modal, the best practice is to not have them nested into somthing, because in the end a modal is an overlay to the entire page, so logically, it is above everything else. And if it is nested in some other HTML code, it might technically work because of CSS styling **but it is not good code, it's not good structure**; in addition, it can lead to real problems with styling or accessibility (e.g. a screen reader might not see it as a overlay) and you would have similar problems for side drawers, dialogues, for all kinds of overlays or any related component.
+We can use another React feature to get rid of the problem with the overlay/modal that should not be deeply nested: we can use a *portal* to keep the structure we want to have / to keep writing components the way we want to write them, and render this differently in the real DOM (e.g. rendering the modal HTML content somewhere else than it would normally go if there was no transofrmation from the HTML that we defined).
