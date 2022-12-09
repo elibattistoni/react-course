@@ -29,6 +29,11 @@ function App() {
       setIsLoggedIn(true); // if you update the state here the component will run again
     }
   }, []);
+  /*
+  # this is a scenario with no dependencies
+  # however, in other cases you need dependencies because you just don't want to run this effect function once when the app starts up,
+  # but after every component re-evaluation if a certain dependency changed: go to the Login.js file where you define the Login component
+  */
 
   // Handler function that executes when the user clicks the button
   const loginHandler = (email, password) => {
