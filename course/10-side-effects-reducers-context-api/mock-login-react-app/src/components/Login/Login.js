@@ -32,9 +32,36 @@ const Login = (props) => {
       // and we then want to trigger another action in response to that (i.e. checking and updating the form validity in response to a keystroke in the email or password field)
       // this is a side effect of the user entering data
       //# in general, useEffect is an important hook that helps you deal with code that should be executed in response to something
-      setFormIsValid(
-        enteredEmail.includes("@") && enteredPassword.trim().length > 6
-      );
+      // this was done before introducting debouncing
+      // setFormIsValid(
+      //   enteredEmail.includes("@") && enteredPassword.trim().length > 6
+      // );
+      //==================================
+      //# DEBOUNCING
+      //==================================
+      // IMPORTANT this update state function runs on every keystroke: in this case it is not a problem; however, we are also updating the state: this is already not ideal
+      /// whenever it runs (on every keystroke) therefore React checks whether it has to change something in the DOM (and this is not what you might want to do on every keystroke)
+      /// if you did something more complex (e.g. sending HTTP request to the backend in order to check whether a username is already in use) if you did that on every keystroke that would be bad for performance (too many requests, much netwrok traffic)
+      /// what you might want to do: to run the effect function after a certain number of keystrokes, or if the user pauses (with a certain time duration after a keystroke)
+      /// e.g. the user has stopped typing for 500ms, let's see if it is valid
+      // IMPORTANT this technique is called DEBOUNCING: we want to debounce the user input, we don't want to do it on every keystroke, but once the user has paused typing
+      // we can use setTimeout in order to wait for 500ms before executing a function
+      const identifier = setTimeout(() => {
+        console.log("check form validity");
+        setFormIsValid(
+          enteredEmail.includes("@") && enteredPassword.trim().length > 6
+        );
+      }, 500);
+      // so on every keystroke we set a timer, and after 500ms we do this
+      //NB you have to save the timer, and for the next keystroke, we clear it so that we have only one ongoing timer at a time,
+      //NB and therefore only the last timer will complete, and as long as the user keeps typing, we clear the other timers
+      //NB and you do this by returning a cleanup function with `return () => {}`
+      //NB this cleanup function runs before every new side effect function execution and before
+      //NB the component is removed and it does not run before the first side effect function execution
+      return () => {
+        console.log("CLEANUP");
+        clearTimeout(identifier); // whenever the cleanup function runs, the timer that I set before this cleanup function ran (i.e. in the last side effect function ececution, we can set a new timer)
+      }; // cleanup function (this will act as a cleanup process before useEffect executes this function the next time)
     },
     // NB the rule is: add as dependencies what you are using in your side effect function
     // NB this tells React that after every Login component function execution, it will re-run this useEffect function
