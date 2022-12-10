@@ -13,3 +13,8 @@ this React Context Concept, which allows us to manage State kind of behind the s
 
 # How to use
 - in the source (src) folder, create a subfolder named "context" or "store" or "state"; since we are going to manage authentication states, let's add a file named "auth-context.js" (better using kebab case) NB you can have multiple contexts for multiple global states in your app (and if you want you can use just one context for a bigger state -- it's up to you)
+
+# Dynamic Context
+NB we can set up a dynamic context where we don't just pass data to our component but also functions
+
+NB when to use props vs. context: in most cases you will use props to pass data to components because props are our mechanism to configure components and make them reusable. Only if you have some data that is forwarded through a lot of components, and you are forwarding it to a component that does something very specific (e.g. the Navigation component in thish the Button always logs the user out) only in these cases you want to consider context

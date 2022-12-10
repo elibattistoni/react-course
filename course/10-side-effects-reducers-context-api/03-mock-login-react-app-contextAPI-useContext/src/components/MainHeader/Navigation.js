@@ -4,7 +4,7 @@ import AuthContext from "../../store/auth-context";
 
 // NB useContext is a React Hook that allows us to tap into a Context and listen to it
 
-const Navigation = (props) => {
+const Navigation = () => {
   // NB with useContext
   const ctx = useContext(AuthContext);
 
@@ -23,7 +23,7 @@ const Navigation = (props) => {
         )}
         {ctx.isLoggedIn && (
           <li>
-            <button onClick={props.onLogout}>Logout</button>
+            <button onClick={ctx.onLogout}>Logout</button>
           </li>
         )}
       </ul>

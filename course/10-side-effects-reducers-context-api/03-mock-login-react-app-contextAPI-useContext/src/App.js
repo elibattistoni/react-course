@@ -35,13 +35,23 @@ function App() {
   you will be able to change that object e.g. through state and the app component, and whenever it changes, the new value will be passed down to all consuming components
   */
 
+  //NB you can make CONTEXT DYNAMIC by passing not only data to our components, but also functions
+  // we can pass down onLogout a pointer to logoutHandler
+  // so that every component that listens to AuthContext will be able to use the logoutHandler function
+
+  // in the <main></main> we still pass this
+  // {!isLoggedIn && <Login onLogin={loginHandler} />}
+  // {isLoggedIn && <Home onLogout={logoutHandler} />}
+  // because we directly use those handlers in the Login component and in the Home component (we are not really forwarding it)
+
   return (
     <AuthContext.Provider
       value={{
         isLoggedIn: isLoggedIn,
+        onLogout: logoutHandler,
       }}
     >
-      <MainHeader onLogout={logoutHandler} />
+      <MainHeader />
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
