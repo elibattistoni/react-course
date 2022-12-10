@@ -1,0 +1,2 @@
+# useReducer()
+useReducer is another built-in React Hook that heps with state management. It is similar to useState but it has more features/capabilities, especially useful for more complex states. Sometimes ou have more complex states, e.g. multiple states that belong together / that are managing the same thing, but just different aspects of it.
