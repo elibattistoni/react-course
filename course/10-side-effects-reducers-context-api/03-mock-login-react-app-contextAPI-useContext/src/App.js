@@ -25,6 +25,15 @@ function App() {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
   };
+  /*
+  by specifying the value prop
+  <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+      }}
+    >
+  you will be able to change that object e.g. through state and the app component, and whenever it changes, the new value will be passed down to all consuming components
+  */
 
   return (
     <AuthContext.Provider
