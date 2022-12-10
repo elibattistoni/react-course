@@ -18,7 +18,7 @@ function App() {
     //# this function is "the effect"
     // NB this function is executed AFTER EVERY COMPONENT RE-EVALUATION ONLY IF THE DEPENDENCIES ARE CHANGED
     // NB when you start the app for the first time, the dependencies are considered to have changed (before you had no dependencies), therefore it will run
-    // NB after the first app xecution, in our case where we did not specified any dependency, the dependencies did not change because we don't have any
+    // NB after the first app execution, in our case where we did not specified any dependency, the dependencies did not change because we don't have any
     // NB therefore this function will run only when the app is started, and then never again (no dependencies == no change of the dependencies after the first execution cycle)
     // NB and this is exactly what we want
     // this data fetching is a side effect, it is not directly related to the UI (the result is directly related to the UI but not the data retrieval itself)

@@ -62,3 +62,5 @@ In this example:
 1. with no dependencies: in App.js
 2. with dependencies in Login.js
 3. DEBOUNCING: in Login.js
+
+NB useState and useEffect are the most important React hooks
