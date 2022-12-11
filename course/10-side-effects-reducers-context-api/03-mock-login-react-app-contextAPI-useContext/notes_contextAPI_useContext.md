@@ -18,3 +18,6 @@ this React Context Concept, which allows us to manage State kind of behind the s
 NB we can set up a dynamic context where we don't just pass data to our component but also functions
 
 NB when to use props vs. context: in most cases you will use props to pass data to components because props are our mechanism to configure components and make them reusable. Only if you have some data that is forwarded through a lot of components, and you are forwarding it to a component that does something very specific (e.g. the Navigation component in thish the Button always logs the user out) only in these cases you want to consider context
+
+# Building & using a custom context provider component
+- depending on your application structure and how you are managing data, you might also want to pull more logic out of the App component and create a separate Context Management component (cfr auth-context.js)
