@@ -26,3 +26,11 @@ NB when to use props vs. context: in most cases you will use props to pass data 
 - It can be great for app-wide or component-wide state (i.e. states that affect multiple components), but NB it's not a replacement for component configuration. For example, Button component: the button should be reusable; we could use Context to make sure that upon a click we always logged the user out, but that would mean that we can't use the button for anything else than logging users out. And that might not be what you want. For example, in this application, we are using the same button component for the login, for the logout and for the form submission. So that is a scenario where using Context in the button component would be bad. You wanna use props to configure the button.
 - best practice: props for configuration, context for state management across components or possibly across the entire app
 - IMPORTANT however, React Context is not optimized for high frequency changes, e.g. if you have state changes every second or multiple times per second (which is not our case for user authentication, which does not change very often). Solution: **REDUX**
+
+# Rules to know about React Hooks
+React Hooks == all those functions that start with "use"
+
+There are 2 main rules:
+1. Only call React Hooks in React Functions; React functions can be: 1) Component functions, and 2) Custom Hooks
+2. Only call React Hooks at the TOP LEVEL of your React Component Functions or of your Custom React Hooks: do not call them 1) in nested functions, and 2) in any block statements
+3. (unofficial rule for useEffect specifically) ALWAYS add everything you refer to inside of useEffect() as a dependency (e.g. data from the surrounding component state or props), unless there is a good reason not to do that (e.g. like state updating functions, which are guaranteed by React to never change; you can add it if you want, it does not change anything, but just know that you are allowd to omit it; do not add data or functions that are coming from the browser or from outside your component function)
