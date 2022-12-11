@@ -21,3 +21,8 @@ NB when to use props vs. context: in most cases you will use props to pass data 
 
 # Building & using a custom context provider component
 - depending on your application structure and how you are managing data, you might also want to pull more logic out of the App component and create a separate Context Management component (cfr auth-context.js)
+
+# Context Limitations
+- It can be great for app-wide or component-wide state (i.e. states that affect multiple components), but NB it's not a replacement for component configuration. For example, Button component: the button should be reusable; we could use Context to make sure that upon a click we always logged the user out, but that would mean that we can't use the button for anything else than logging users out. And that might not be what you want. For example, in this application, we are using the same button component for the login, for the logout and for the form submission. So that is a scenario where using Context in the button component would be bad. You wanna use props to configure the button.
+- best practice: props for configuration, context for state management across components or possibly across the entire app
+- IMPORTANT however, React Context is not optimized for high frequency changes, e.g. if you have state changes every second or multiple times per second (which is not our case for user authentication, which does not change very often). Solution: **REDUX**
