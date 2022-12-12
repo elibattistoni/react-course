@@ -14,14 +14,31 @@ const initialCartState = {
 };
 
 const cartReducer = (state, action) => {
-  // NB concat() adds a new element to an array but it creates a new array, it does not overwrite the original one
-  // NB same as push() but push() edits the original array
-
   if (action.actionType === "ADD_CART_ITEM") {
     // console.log("action.type: ", action.actionType);
-    const updatedItems = state.items.concat(action.item);
     const updatedTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
+
+    // is the newly added item already part of the array items? if so, increase the amount; if not present, add new item
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.item.id
+    );
+    const existingCartItem = state.items[existingCartItemIndex];
+    let updatedItems;
+
+    if (existingCartItem) {
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount + action.item.amount,
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
+    } else {
+      // concat() adds a new element to an array but it creates a new array, it does not overwrite the original one
+      // same as push() but push() edits the original array
+      updatedItems = state.items.concat(action.item);
+    }
+
     // return an updated state snapshot
     return {
       items: updatedItems,
