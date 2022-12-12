@@ -14,6 +14,7 @@ const initialCartState = {
 };
 
 const cartReducer = (state, action) => {
+  // manage add items
   if (action.actionType === "ADD_CART_ITEM") {
     // console.log("action.type: ", action.actionType);
     const updatedTotalAmount =
@@ -23,7 +24,9 @@ const cartReducer = (state, action) => {
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id
     );
+
     const existingCartItem = state.items[existingCartItemIndex];
+
     let updatedItems;
 
     if (existingCartItem) {
@@ -37,6 +40,34 @@ const cartReducer = (state, action) => {
       // concat() adds a new element to an array but it creates a new array, it does not overwrite the original one
       // same as push() but push() edits the original array
       updatedItems = state.items.concat(action.item);
+    }
+
+    // return an updated state snapshot
+    return {
+      items: updatedItems,
+      totalAmount: updatedTotalAmount,
+    };
+  }
+
+  // manage remove items
+  if (action.actionType === "REMOVE_CART_ITEM") {
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.id
+    );
+    const existingCartItem = state.items[existingCartItemIndex];
+    const updatedTotalAmount = state.totalAmount - existingCartItem.price;
+    console.log("updatedTotalAmount", updatedTotalAmount);
+    let updatedItems;
+
+    if (existingCartItem.amount === 1) {
+      updatedItems = state.items.filter((item) => item.id !== action.id);
+    } else {
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount - 1,
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
     }
 
     // return an updated state snapshot
