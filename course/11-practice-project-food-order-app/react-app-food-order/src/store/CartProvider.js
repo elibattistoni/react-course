@@ -17,10 +17,11 @@ const cartReducer = (state, action) => {
   // NB concat() adds a new element to an array but it creates a new array, it does not overwrite the original one
   // NB same as push() but push() edits the original array
 
-  if (action.type === "ADD_CART_ITEM") {
+  if (action.actionType === "ADD_CART_ITEM") {
+    // console.log("action.type: ", action.actionType);
     const updatedItems = state.items.concat(action.item);
     const updatedTotalAmount =
-      state.totalAmount + action.item.price * action.type.amount;
+      state.totalAmount + action.item.price * action.actionType.amount;
     // return an updated state snapshot
     return {
       items: updatedItems,
@@ -41,7 +42,9 @@ const CartProvider = (props) => {
   );
 
   const addItemToCartHandler = (item) => {
+    // console.log("addItemToCartHandler: ", addItemToCartHandler);
     dispatchCartAction({ actionType: "ADD_CART_ITEM", item: item });
+    // this is linked to MealItem (in the MealItem the addItem function will be called)
   };
 
   const removeItemFromCartHandler = (id) => {
