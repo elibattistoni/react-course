@@ -6,6 +6,13 @@ import ErrorModal from "../UI/ErrorModal";
 import Wrapper from "../Helpers/Wrapper";
 import classes from "./AddUser.module.css";
 
+/*
+= Portals
+# portals need 2 things: 1) a place where you want to port the Component to, and 2) you need to let the Component know that it should have a portal to that place
+# 1) to mark the place, go to the index.html file and add a div with an id that you will use to identify that place with "backdrop-root" and "overlay-root"
+# 2) go to the ErrorModal component definition and tell React that this component (ErrorModal) should be portaled somewhere (add the Backdrop component in ErrorModal.js)
+*/
+
 const AddUser = (props) => {
   // like all React Hooks, useRef is only usable inside of a function component
   //NB we are going to set up a connection with the input with id="username", and another connection with the input with id="age"
