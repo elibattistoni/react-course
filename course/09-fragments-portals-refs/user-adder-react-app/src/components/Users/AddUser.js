@@ -14,19 +14,26 @@ import classes from "./AddUser.module.css";
 */
 
 const AddUser = (props) => {
+  //
+  //============================================================================
+  //# useRef
+  //============================================================================
+  //# https://dmitripavlutin.com/react-useref-guide/
   // like all React Hooks, useRef is only usable inside of a function component
-  //NB we are going to set up a connection with the input with id="username", and another connection with the input with id="age"
-  //NB to connect them with the HTML element, the HTML element should have a special prop: "ref"
+  // we are going to set up a connection with the input with id="username", and another connection with the input with id="age"
+  // to connect them with the HTML element, the HTML element should have a special prop: "ref"
+
   const nameInputRef = useRef(); // initialized to undefined (default)
   const ageInputRef = useRef(); // initialized to undefined (default)
-  //NB when React renders the JSX code that this component returns,
-  //NB it will set the values stored in nameInputRef and ageInputRef to the native DOM element that is rendered based on this input
-  //NB therefore nameInputRef and ageInputRef will be real DOM elements
-  //NB we talk about UNCONTROLLED COMPONENTS when we use the approach of using refs to interact with DOM elements (specifically with input elements)
-  //- UNCONTROLLED COMPONENTS = when we acces values with refs. UNCONTROLLED because their internal state (i.e. the value that is refelctd in them) is not controlled by React
-  //- because we are not controlling the state with useState
-  //NB with refs we don't feed data back into the input
-  //NB the approach we have before, with useState was the CONTROLLED APPROACH (and we would say that those input fields are CONTROLLED COMPONENTS because their internal state is controlled by React)
+
+  // when React renders the JSX code that this component returns,
+  // it will set the values stored in nameInputRef and ageInputRef to the native DOM element that is rendered based on this input
+  // therefore nameInputRef and ageInputRef will be real DOM elements
+  // we talk about UNCONTROLLED COMPONENTS when we use the approach of using refs to interact with DOM elements (specifically with input elements)
+  // UNCONTROLLED COMPONENTS = when we acces values with refs. UNCONTROLLED because their internal state (i.e. the value that is refelctd in them) is not controlled by React
+  // because we are not controlling the state with useState
+  // with refs we don't feed data back into the input
+  // the approach we have before, with useState was the CONTROLLED APPROACH (and we would say that those input fields are CONTROLLED COMPONENTS because their internal state is controlled by React)
 
   //IMPORTANT get rid because you are now using refs
   // const [enteredName, setEnteredUsername] = useState("");
@@ -36,14 +43,14 @@ const AddUser = (props) => {
   const addUserHandler = (event) => {
     event.preventDefault();
 
-    //NB log refs
+    // log refs
     console.log(nameInputRef); //NB this is always an object with key "current" and this holds the actual value that the ref is connected with
-    //NB and the actual value is the actual DOM node!!! which you can now manipulate etc BUT YOU SHOULD NOT (THE DOM SHOULD BE ONLY MANIPULATED BY REACT)
-    //NB HOWEVER YOU CAN READ DATA FROM IT!!! =)
+    // and the actual value is the actual DOM node!!! which you can now manipulate etc BUT YOU SHOULD NOT (THE DOM SHOULD BE ONLY MANIPULATED BY REACT)
+    // HOWEVER YOU CAN READ DATA FROM IT!!! =)
     console.log(nameInputRef.current.value);
     //NB so now we can get access to the values stored in the element without storing every keystroke
-    //NB (which is what you do when you update the state of the component on every keystroke with setEnteredUsername and setEnteredAge)
-    //NB we can just read it when the button is pressed
+    // (which is what you do when you update the state of the component on every keystroke with setEnteredUsername and setEnteredAge)
+    // we can just read it when the button is pressed
     //and thjerefore get rid of all the state updating functions and all the related variables and handlers
 
     const enteredRefName = nameInputRef.current.value;

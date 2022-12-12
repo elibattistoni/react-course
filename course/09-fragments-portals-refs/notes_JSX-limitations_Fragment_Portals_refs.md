@@ -40,3 +40,6 @@ We can use another React feature to get rid of the problem with the overlay/moda
 Refs is a powerful feature: they allow us to get access to other DOM elements and work with them.
 For example: in AddUser.js, we update the state on every keystroke, but in fact we need to update the state only when the user sumbits the form. **With refs you can set up a connection between an HTML element that is going to be rendered and our Javascript code**. Go to AddUser to see how refs work.
 1. Create a ref with another React Hook: useRef
+
+https://dmitripavlutin.com/react-useref-guide/
+basically useRef an alternative to useState, it allows e.g. to store the input values from a form in to a variable in real time without re-rendering the component every time (with useState, every time you update the values defined with useState, the component re-renders)
