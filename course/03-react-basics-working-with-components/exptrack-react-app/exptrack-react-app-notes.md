@@ -21,3 +21,6 @@ The **props.children** feature allows you to create wrapper components which is 
 
 ## Organizing further the components/ folder
 Best to group components: "components/UI" folder for general user interface elements; "components/Expenses/" for dealing with expenses and expense data
+
+# React props: practical guide
+https://dmitripavlutin.com/react-props/
