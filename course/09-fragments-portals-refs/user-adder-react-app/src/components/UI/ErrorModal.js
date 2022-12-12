@@ -36,6 +36,7 @@ const ErrorModal = (props) => {
       {ReactDOM.createPortal(
         <Backdrop onConfirm={props.onConfirm} />,
         document.getElementById("backdrop-root")
+        // backdrop-root is an empty div that you created in you index.html
       )}
       {ReactDOM.createPortal(
         <ModalOverlay
@@ -44,6 +45,7 @@ const ErrorModal = (props) => {
           onConfirm={props.onConfirm}
         />,
         document.getElementById("overlay-root")
+        // overlay-root is an empty div that you created in you index.html
       )}
     </Fragment>
   );
@@ -51,6 +53,5 @@ const ErrorModal = (props) => {
 
 // NB without a PORTAl the error modal is rendered, in the real DOM, next to the Card that contains the form, instead of being rendered in the root div (which should be the best practice)
 //# we actually want to have the div with the modal and the div with the overlay as direct children of the body, next to the root div which holds the rest of the application
-// NB go to App.js to see the implementation of Portal
 
 export default ErrorModal;

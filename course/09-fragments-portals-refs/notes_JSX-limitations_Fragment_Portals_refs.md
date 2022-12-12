@@ -36,6 +36,8 @@ IMPORTANT
 NB when you have a modal, the best practice is to not have them nested into something, because in the end a modal is an overlay to the entire page, so logically, it is above everything else. And if it is nested in some other HTML code, it might technically work because of CSS styling **but it is not good code, it's not good structure**; in addition, it can lead to real problems with styling or accessibility (e.g. a screen reader might not see it as a overlay) and you would have similar problems for side drawers, dialogues, for all kinds of overlays or any related component.
 We can use another React feature to get rid of the problem with the overlay/modal that should not be deeply nested: we can use a *portal* to keep the structure we want to have / to keep writing components the way we want to write them, and render this differently in the real DOM (e.g. rendering the modal HTML content somewhere else than it would normally go if there was no transofrmation from the HTML that we defined).
 
+with React function createPortal()
+
 # References or "ref"s
 Refs is a powerful feature: they allow us to get access to other DOM elements and work with them.
 For example: in AddUser.js, we update the state on every keystroke, but in fact we need to update the state only when the user sumbits the form. **With refs you can set up a connection between an HTML element that is going to be rendered and our Javascript code**. Go to AddUser to see how refs work.
