@@ -13,3 +13,11 @@ Create a new folder named "pages": BEST PRACTICE it is a good way of differentia
 
 # Uploading images
 https://academind.com/tutorials/reactjs-image-upload
+
+# Getting user input and handling form submission
+to handle the form submission, we have to do two main things:
+- listen to the form submission; we have to prevent the browser default (sending an HTTP request automatically, and hence reloading the page) and handle the submission with JavaScript with react.
+- read the entered values, i.e. get the actual input the user entered.
+
+==> https://academind.com/tutorials/building-a-restful-api-with-nodejs
+==> https://academind.com/tutorials/connect-to-database
