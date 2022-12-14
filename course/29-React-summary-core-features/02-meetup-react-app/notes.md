@@ -10,3 +10,6 @@ This is a package that allows to add routing functionality to react; it allows u
 ## What does **add routing** mean?
 We need to add this routing tool to our code so that it can watch for URL changes; and we need this tool know which component should be loaded as a page for which route (i.e. for which URL).
 Create a new folder named "pages": BEST PRACTICE it is a good way of differentiating and of separating our components that are embedded in other components (which are storedn in the components folder), from the components that will be loaded as pages (NB we build them in the same exact way, it is just of help for us developers)
+
+# Uploading images
+https://academind.com/tutorials/reactjs-image-upload
