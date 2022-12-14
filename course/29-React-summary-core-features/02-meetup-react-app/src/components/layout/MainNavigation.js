@@ -17,19 +17,21 @@ the to prop sets the path of the page that we want to go to
 
 import { Link } from "react-router-dom";
 
+import classes from "./MainNavigation.module.css";
+
 const MainNavigation = (props) => {
   return (
-    <header>
-      <div className="">Page Logo here</div>
+    <header className={classes.header}>
+      <div className={classes.logo}>Page Logo here</div>
       <nav>
-        <ul className="">
-          <li className="">
+        <ul>
+          <li>
             <Link to="/">All Meetups</Link>
           </li>
-          <li className="">
+          <li>
             <Link to="/new-meetup">Add New Meetup</Link>
           </li>
-          <li className="">
+          <li>
             <Link to="/favorites">My Favourites</Link>
           </li>
         </ul>
