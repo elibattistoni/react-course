@@ -4,6 +4,8 @@ import AllMeetupsPage from "./pages/AllMeetups";
 import FavoritesPage from "./pages/Favorites";
 import NewMeetupPage from "./pages/NewMeetup";
 
+import MainNavigation from "./components/layout/MainNavigation";
+
 /*
 Route component: its job is to define different paths in the URL we want to listen to,
 and which component should be loaded for these different paths
@@ -34,6 +36,7 @@ this tells the react router that for this route it should not check is the path 
 function App() {
   return (
     <div>
+      <MainNavigation />
       <Switch>
         <Route path="/" exact={true}>
           {/* this is the default path -- this is the starting page and the page
