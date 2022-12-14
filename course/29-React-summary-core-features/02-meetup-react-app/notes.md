@@ -37,4 +37,6 @@ And therefore it can look like if we're directly sending requests to a database 
 The Firebase real-time database service works such that this URL can be manipulated. We can add segments after this domain. And then these segments will be translated into folders ordatabase tables (e.g. https://console.firebase.google.com/u/0/project/meetup-react-app-55f77/database/meetups) and this (called with fetch, cfr NewMeetup.js) would add a meetup table. i.e. a meetup collection to the database (+ you need to add .json at the end of the segment you want to insert)
 
 
-IMPORTANT https://sebhastian.com/html-hover-text/
+# Add navigation programmatically
+When the user submits the form we want to give some feedback that it worked, so we want to navigate away from this page once the post request is sent.
+note that previously we added manual navigation (in the header), but in this case we want to trigger navigation programmatically, once we are done with the task of sending the request (this is simple with React Router)
