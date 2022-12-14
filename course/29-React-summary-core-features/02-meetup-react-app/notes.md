@@ -21,3 +21,15 @@ to handle the form submission, we have to do two main things:
 
 ==> https://academind.com/tutorials/building-a-restful-api-with-nodejs
 ==> https://academind.com/tutorials/connect-to-database
+
+# Sending the user form data to a server for storing it into a database
+With React or with single page applications (SPAs) in general, we need a backend API to which you can send your requests; a backend which expects data in a certain format (typically JSON) and which returns data in that JSON format; a backend which simply exposes a couple of URLs to which you can send requests, and depending on which URL you are sending a request to, different things will happen: this is the kind of backend that you typically connect to with React. **You don't connect a front-end application like React or Angular to a database itself because of security**.
+All the code you write in your React application is exposed to the visitors of your page. Through to dev tools, If I look at sources, if I dig into that I can read the JavaScript code that makes up your application. And database credentials would be in there as well. That's why instead we need a backend API, a backend server to which we can send requests and then its that server, which on the server connects to a database and stores data in a database. **We are going to use Firebase as a dummy backend**. Firebase is a service offered by Google. It is actually made up of a bunch of different services but it is a service which you can get started with for free. You just need a Google account. **Firebase is a service that contains a database and an API to which we can send requests, which will then ensure that data is saved in that database.**
+We are  using this backend, this service, because that allows me to show you how you send requests to a backend. And you would then do that in the same way no matter which backend you use in the end. That's why that's a good service to use.
+
+After creating the project go to "Realtime Database"
+https://console.firebase.google.com/u/0/project/meetup-react-app-55f77/database
+Create database ==> Start in test mode (not in locked mode) otherwise you will not be able to send requests
+IMPORTANT this sets up a database and NB and API to which we can send requests
+We can use the URL in the top of the container to send requests to, and behind the scenes on Firebase servers those requests will then be parsed, and depending on which kind of request we send, data attached to the request will be extracted and stored in the database automatically.
+And therefore it can look like if we're directly sending requests to a database but we're actually sending requests to that Firebase API which then behind the scenes stores them in a database.

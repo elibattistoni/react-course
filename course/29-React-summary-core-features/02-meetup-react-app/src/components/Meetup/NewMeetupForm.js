@@ -3,6 +3,7 @@ import Card from "../UI/Card";
 import classes from "./NewMeetupForm.module.css";
 
 const NewMeetupForm = (props) => {
+  // set references for getting data once the user submits the form
   const titleReference = useRef();
   const imageReference = useRef();
   const addressReference = useRef();
@@ -10,15 +11,23 @@ const NewMeetupForm = (props) => {
 
   // function that handles form submission
   const submitHandler = (e) => {
+    // prevent default (i.e. sending HTTP request + reloading page)
     e.preventDefault();
+
     // get data with refs
-    const data = {
+    const meetupData = {
       title: titleReference.current.value,
       image: imageReference.current.value,
       address: addressReference.current.value,
       description: descriptionReference.current.value,
     };
-    console.log(data);
+    console.log(meetupData);
+    // we don't want to log the results to the console, but we want to send it
+    // to a server for storing it into a db --> but we will do it in the NewMeetup component
+    // because we want to handle the functionality of sending HTTP requests there (since this component is already very big)
+
+    // call the function that stores the data (from the NewMeetup component)
+    props.onAddMeetup(meetupData);
   };
 
   return (
