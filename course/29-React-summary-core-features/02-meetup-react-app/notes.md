@@ -40,3 +40,8 @@ The Firebase real-time database service works such that this URL can be manipula
 # Add navigation programmatically
 When the user submits the form we want to give some feedback that it worked, so we want to navigate away from this page once the post request is sent.
 note that previously we added manual navigation (in the header), but in this case we want to trigger navigation programmatically, once we are done with the task of sending the request (this is simple with React Router)
+
+# Fetching data
+On the starting page we want to show only the data stored in the database.
+To load data from our backend (from our API) we need to send an HTTP GET request.
+When do we want to send the request? Whenever the ALlMeetupusPage component is rendered
