@@ -33,7 +33,7 @@ const FavoritesContextProvider = (props) => {
     });
   };
 
-  const meetupIsFavoriteHandler = (meetupId) => {
+  const isFavoriteHandler = (meetupId) => {
     return userFavorites.some((meetup) => meetup.id === meetupId);
   };
 
@@ -42,6 +42,10 @@ const FavoritesContextProvider = (props) => {
   const context = {
     favorites: userFavorites,
     totalFavorites: userFavorites.length,
+    //| expose pointers to the favorites updating functions
+    addFavorite: addFavoriteHandler,
+    removeFavorite: removeFavoriteHandler,
+    isFavorite: isFavoriteHandler,
   };
 
   //============================================================
