@@ -45,3 +45,15 @@ note that previously we added manual navigation (in the header), but in this cas
 On the starting page we want to show only the data stored in the database.
 To load data from our backend (from our API) we need to send an HTTP GET request.
 When do we want to send the request? Whenever the ALlMeetupusPage component is rendered
+
+# Adding to favorites functionality
+We will have different parts of the application that will be affected by the state of the favorites:
+- in the All Meetups Page, mark if a meetup has been marked as favorite
+- in the header, next to the "My Favorite" have a count of favorites
+- in the My Favorites Page, have the list of favorites
+
+Therefore, since we will have a state that affects more than one component, we will need a mechanism of managing that state globally and distributing that state to different components.
+ We have two options:
+ 1. **Lifting the state up** (i.e. manage the favorites state in App.js and then we pass it into all the components that are interested through props)
+        That would work, but it has a couple of downsides. One problem would be that if we have a bigger application with different States that affect different components we have to manage more and more state in this app component, and hence this app component becomes bigger and bigger and that's maybe not ideal. Another problem is that if we pass states down through props that we can end up with very long prop chains (i.e. we pass props to a component that does not need props necessarily for its own rendering, but only beause so it can pass it down to other components that need props -- not a good practice).
+ 2. Because of issues like this, there are state management solutions for managing application wide state in a more convenient way. One very popular state management package is Redux. I cover it in my course, but for many scenarios we don't even need Redux, because react also has a built in state management solution for application wide state. And that's a feature called **context**. For implementing this feature, ad in the src folder a new subfolder named **store** because in here we will set up the state store for this application.
