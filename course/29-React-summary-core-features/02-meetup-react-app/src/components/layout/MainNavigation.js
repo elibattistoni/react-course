@@ -15,11 +15,14 @@ it will just parde the URL you want to go to and change it in the broser bar, no
 the to prop sets the path of the page that we want to go to
 */
 
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
 import classes from "./MainNavigation.module.css";
+import FavoritesContext from "../../store/favorites-context";
 
 const MainNavigation = (props) => {
+  const favoritesCtx = useContext(FavoritesContext);
+
   return (
     <header className={classes.header}>
       <div className={classes.logo}>Page Logo here</div>
@@ -32,7 +35,12 @@ const MainNavigation = (props) => {
             <Link to="/new-meetup">Add New Meetup</Link>
           </li>
           <li>
-            <Link to="/favorites">My Favourites</Link>
+            <Link to="/favorites">
+              My Favourites
+              <span className={classes.badge}>
+                {favoritesCtx.totalFavorites}
+              </span>
+            </Link>
           </li>
         </ul>
       </nav>
