@@ -16,10 +16,19 @@ so we initialize the router package, we make it aware of this App component and 
 for the different URLs: do this in the App component (where you import and use the Route component)
 */
 
+//NB if in a js module you have both a default export and a named export:
+//NB if you import like this, you will get the default export
+//NB import FavoritesContext from "./store/favorites-context"
+//NB instead if you want the named export you have to provide the named export between { }
+import { FavoritesContextProvider } from "./store/favorites-context";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+//NB now all the components in our app can interact with this context
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <FavoritesContextProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </FavoritesContextProvider>
 );

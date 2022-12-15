@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 //| this constant named FavoritesContext is a React component
 //| createContext() takes as input argument the initial value of the context, i.e. the initial value for this application or component-wide state
