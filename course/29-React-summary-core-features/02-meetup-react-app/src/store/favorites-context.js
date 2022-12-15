@@ -5,6 +5,9 @@ import { createContext } from "react";
 const FavoritesContext = createContext({
   favorites: [],
   totalFavorites: 0,
+  addFavorite: (meetup) => {},
+  removeFavorite: (meetupId) => {},
+  isFavorite: (meetupId) => {},
 });
 
 //| in order to changing the app-wide state, we have to add another component in this file
