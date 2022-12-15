@@ -13,7 +13,7 @@ const FavoritesContext = createContext({
 //| in order to changing the app-wide state, we have to add another component in this file
 //| this is a regular React component, and its job will be of providing this context to all the components that need information about the app-wide state
 //| this component is also responsible of updating the context values
-const FavoritesContextProvider = (props) => {
+export const FavoritesContextProvider = (props) => {
   //============================================================
   //| here we can manage the context data with state
   //| so when we manage state here and change the state, this component will be re-evaluated
@@ -58,3 +58,5 @@ const FavoritesContextProvider = (props) => {
     </FavoritesContext.Provider>
   );
 };
+
+export default FavoritesContext;
