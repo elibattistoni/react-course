@@ -24,3 +24,17 @@ export default React.memo(DemoOutput)
 IMPORTANT: go to DemoOutput.js !!!!!
 
 https://academind.com/tutorials/reference-vs-primitive-values
+
+In the context or React.memo() we used useCallback()
+NB useCallback() is a hook that allows us to store a function across component executions:
+- it allows us to tell React that we want to save a function and that this function should not be recreated with every execution
+- with this, the comparison work because only one function value is stored in memory
+NB so if we know for certain that a function never changes, we can useCallback to store it
+NB like with useEffect, useCallback wants a second argument: an array of dependencies
+
+
+# useMemo() Hook: memoize
+with useCallback() you can store functions
+with useMemo() you can store values across component executions, just like useCallback() does for functions
+
+==> useMemo will have two input arguments: 1) a function, which should return the value that you want to memorize; 2) the array of dependencies, to ensure that the stored value gets updated whenever one of the dependencies changes
