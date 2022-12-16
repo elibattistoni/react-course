@@ -15,9 +15,12 @@ So the real DOM is not changed all the time: it is changed rarely and only when 
 
 IMPORTANT for a component function to be re-evaluated it's enough that the parent component was re-evaluated (and ofc, this does not mean that the real DOM changes). However, **if a component is re-executed, then all its child components will be re-executed and re-evaluated**. But doesn't it cost in terms of performance (imagine you have a big components tree)??
 React is highly optimized for those executions and comparisons. Especially in simple apps, this will not matter. However, in bigger apps, it is advisable to optimize it.
-You can tell React that it should re-execute a component under certain circumstances (e.g., the props that the component receives, have changed). If you want to do that, in the component definition (NB this syntax is valid only for functional components) export the componen wrapped with React.memo():
+You can tell React that it should re-execute a component under certain circumstances (e.g., the props that the component receives, have changed). If you want to do that, in the component definition (NB this syntax is valid only for functional components -- we will see howt to optimize class-based components and how to optimize them in the class-based section) export the componen wrapped with React.memo():
 
 see DemoOutput.js
 ```
 export default React.memo(DemoOutput)
 ```
+IMPORTANT: go to DemoOutput.js !!!!!
+
+https://academind.com/tutorials/reference-vs-primitive-values
