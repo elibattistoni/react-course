@@ -13,7 +13,8 @@ function App() {
     setShowParagraph((prevShowParagraph) => !prevShowParagraph);
   }, []);
   // NB like with useEffect, we have to specify an array of dependencies as a second argument
-  // NB no dependencies === this function will never change, therefore always the same function object should be reused when the app component re-renders
+  // NB no dependencies === this function will never change, therefore always the same function
+  //- object should be reused when the app component re-renders **
 
   return (
     <div className="app">
@@ -25,3 +26,9 @@ function App() {
 }
 
 export default App;
+
+/*
+NB (**) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+in JS functions are closures, i.e. they close over the values that are available in their environment at the moment of the creation
+NB you need to understand closures to understand fully how React works!!
+*/
