@@ -21,7 +21,6 @@ const NewMeetupForm = (props) => {
       address: addressReference.current.value,
       description: descriptionReference.current.value,
     };
-    console.log(meetupData);
     // we don't want to log the results to the console, but we want to send it
     // to a server for storing it into a db --> but we will do it in the NewMeetup component
     // because we want to handle the functionality of sending HTTP requests there (since this component is already very big)

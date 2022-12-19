@@ -28,13 +28,13 @@ All the code you write in your React application is exposed to the visitors of y
 We are  using this backend, this service, because that allows me to show you how you send requests to a backend. And you would then do that in the same way no matter which backend you use in the end. That's why that's a good service to use.
 
 After creating the project go to "Realtime Database"
-https://console.firebase.google.com/u/0/project/meetup-react-app-55f77/database
+`process.env.NOTES_1`
 Create database ==> Start in test mode (not in locked mode) otherwise you will not be able to send requests
 IMPORTANT this sets up a database and NB and API to which we can send requests
 We can use the URL in the top of the container to send requests to, and behind the scenes on Firebase servers those requests will then be parsed, and depending on which kind of request we send, data attached to the request will be extracted and stored in the database automatically.
 And therefore it can look like if we're directly sending requests to a database but we're actually sending requests to that Firebase API which then behind the scenes stores them in a database.
 
-The Firebase real-time database service works such that this URL can be manipulated. We can add segments after this domain. And then these segments will be translated into folders ordatabase tables (e.g. https://console.firebase.google.com/u/0/project/meetup-react-app-55f77/database/meetups) and this (called with fetch, cfr NewMeetup.js) would add a meetup table. i.e. a meetup collection to the database (+ you need to add .json at the end of the segment you want to insert)
+The Firebase real-time database service works such that this URL can be manipulated. We can add segments after this domain. And then these segments will be translated into folders ordatabase tables (e.g. `process.env.NOTES_2`) and this (called with fetch, cfr NewMeetup.js) would add a meetup table. i.e. a meetup collection to the database (+ you need to add .json at the end of the segment you want to insert)
 
 
 # Add navigation programmatically

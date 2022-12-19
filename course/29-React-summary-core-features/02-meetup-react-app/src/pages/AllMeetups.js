@@ -11,9 +11,7 @@ const AllMeetupsPage = (props) => {
   useEffect(() => {
     setIsLoading(true);
     // fetch data from the database through our backend API
-    fetch(
-      "https://meetup-react-app-55f77-default-rtdb.europe-west1.firebasedatabase.app/meetups.json"
-    )
+    fetch(`${JSON.parse(process.env.REACT_APP_URL_DB_TABLE)}`)
       .then((response) => {
         //NB the response object is returned from the fetch promise automatically as an argument
         //NB because this is how the fetch() function works: it returns a promise, which resolves to the actual response AT SOME POINT
