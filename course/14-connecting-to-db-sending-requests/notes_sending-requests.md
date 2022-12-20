@@ -15,3 +15,7 @@ The Star Wars API is a backend app, it is not a database (because browser-side a
 
 **API** is a very broad term not just related to React and HTTP requests; in the end, it means that in our code we're dealing with something which has a clearly defined interface, clearly defined rules on how we can achieve certain results and do certain tasks, and when we talk about APIs in the context of HTTP requests we typically talk about REST or GraphQL APIs, which are basically two different standards for how a server should expose its data.
 This is a REST API, and it simply means that there are a couple of URLs, like this URL which you see here, to which you send that request to get back data in a certain format. And different URLs to which you send different requests will give you different chunks of data. That's what makes it an API. You got different entry points, which lead to different results (more on REST APIs and GraphQL APIs https://academind.com/tutorials/rest-vs-graphql).
+
+# How to send requests in React
+- you can use a library called **axios**, which makes sending HTTP requests very simple (no matter which Javascript library you might be using -- you can use it without any library);
+- nowadays, we also have a built-in mechanism for sending HTTP requests from inside Javascript, and this is the **Fetch API**: the fetch api is built into browsers and it allows us to fetch data (and also to send data!!); and we can use it to send HTTP requests and work with responses.

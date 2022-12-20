@@ -1,31 +1,49 @@
-import React from 'react';
+import React, { useState } from "react";
 
-import MoviesList from './components/MoviesList';
-import './App.css';
+import MoviesList from "./components/MoviesList";
+import "./App.css";
+
+// NB this is the way (best practice) to send HTTP requests from your React app to the backend in order to receive data from a database!!!!
 
 function App() {
-  const dummyMovies = [
-    {
-      id: 1,
-      title: 'Some Dummy Movie',
-      openingText: 'This is the opening text of the movie',
-      releaseDate: '2021-05-18',
-    },
-    {
-      id: 2,
-      title: 'Some Dummy Movie 2',
-      openingText: 'This is the second opening text of the movie',
-      releaseDate: '2021-05-19',
-    },
-  ];
+  const [movies, setMovies] = useState([]);
+
+  const fetchMoviesHandler = async () => {
+    try {
+      // the default method is get, therefore no need to specify it
+      const response = await fetch("https://swapi.py4e.com/api/films");
+      if (!response.ok)
+        throw Error(
+          `Error during fetch: ${response.status}, ${response.statusText}`
+        );
+
+      const data = await response.json();
+
+      // destructure to get results
+      const { results } = data;
+      const editedResults = results.map((res) => {
+        return {
+          id: res.episode_id,
+          title: res.title,
+          openingText: res.opening_crawl,
+          releaseDate: res.release_date,
+        };
+      });
+
+      //update state
+      setMovies(editedResults);
+    } catch (err) {
+      console.error(`💥💥💥 ${err}`);
+    }
+  };
 
   return (
     <React.Fragment>
       <section>
-        <button>Fetch Movies</button>
+        <button onClick={fetchMoviesHandler}>Fetch Movies</button>
       </section>
       <section>
-        <MoviesList movies={dummyMovies} />
+        <MoviesList movies={movies} />
       </section>
     </React.Fragment>
   );
