@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Spinner from "./components/Spinner";
 import MoviesList from "./components/MoviesList";
 import "./App.css";
@@ -10,7 +10,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchMoviesHandler = async () => {
+  //# defiune function to load the movies (when the button is clicked)
+  const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null); // to make sure that any previous error is cleared
     try {
@@ -41,7 +42,22 @@ function App() {
     }
     // set back loading to false regardless of whether getting the data was successful or not
     setIsLoading(false);
-  };
+  }, []);
+
+  //# load movies immediately when the app is loaded with useEffect
+  useEffect(() => {
+    fetchMoviesHandler();
+  }, [fetchMoviesHandler]); //| we should add a pointer to fetchMoviesHandler as a dependency of this effect (the effect should be re-executed whent the function changes)
+  //| and the fetchMoviesHandler could echance if we were using some external state (we are not doing it here, but we could)
+  //| however, fetchMoviesHandler could change on every component re-render cycle because "it is a new object" therefore it is different
+  //| so if we add if as a dependency we could create a infinite loop
+  //| one solution could be to omit it, because in any case we are getting the result that we want
+  //| however this could introduce subtle bugs if our function was using some external state
+  //| so the best practice solution is to use useCallback to wrap the fetchMoviesHandler function with it
+  //| so this works without an infinite loop, we can reload manually and when clicking the button
+  //| so this is how we can leverage useEffect to make sure that we send an HTTP request immediately when a component loads and not just when a button is clicked
+  //| importantly this can also be extended to send HTTP request when other things change
+  //| and we also ensured that the HTTP request really runs when it needs to run but not when it does not need to run
 
   let content;
   if (isLoading) {
