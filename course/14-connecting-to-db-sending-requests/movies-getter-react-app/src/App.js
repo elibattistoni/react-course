@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Spinner from "./components/Spinner";
 import MoviesList from "./components/MoviesList";
 import "./App.css";
 
@@ -7,8 +7,10 @@ import "./App.css";
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchMoviesHandler = async () => {
+    setIsLoading(true);
     try {
       // the default method is get, therefore no need to specify it
       const response = await fetch("https://swapi.py4e.com/api/films");
@@ -32,6 +34,7 @@ function App() {
 
       //update state
       setMovies(editedResults);
+      setIsLoading(false);
     } catch (err) {
       console.error(`💥💥💥 ${err}`);
     }
@@ -43,7 +46,9 @@ function App() {
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
       </section>
       <section>
-        <MoviesList movies={movies} />
+        {isLoading && <Spinner />}
+        {!isLoading && movies.length > 0 && <MoviesList movies={movies} />}
+        {!isLoading && movies.length === 0 && <p>No movies found.</p>}
       </section>
     </React.Fragment>
   );
