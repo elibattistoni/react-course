@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Spinner from "./components/Spinner";
 import MoviesList from "./components/MoviesList";
+import AddMovie from "./components/AddMovie";
 import "./App.css";
 
 // NB this is the way (best practice) to send HTTP requests from your React app to the backend in order to receive data from a database!!!!
@@ -76,8 +77,15 @@ function App() {
     }
   }
 
+  function addMovieHandler(movie) {
+    console.log(movie);
+  }
+
   return (
     <React.Fragment>
+      <section>
+        <AddMovie onAddMovie={addMovieHandler} />
+      </section>
       <section>
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
       </section>
