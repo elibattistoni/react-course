@@ -11,32 +11,48 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const starWarsAPIurl = "https://swapi.py4e.com/api/films";
+  const firebaseAPIurlDB = `${process.env.REACT_APP_URL_FIREBASE_API}${process.env.REACT_APP_FIREBASE_TABLE}`;
+
   //# defiune function to load the movies (when the button is clicked)
   const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null); // to make sure that any previous error is cleared
     try {
       // the default method is get, therefore no need to specify it
-      const response = await fetch("https://swapi.py4e.com/api/films");
+      // const response = await fetch(starWarsAPIurl); // for get request (public api from which you can get data -- but not add data)
+      const response = await fetch(firebaseAPIurlDB); // for post request (firebase)
       if (!response.ok) {
         throw Error(`${response.status} Error during fetch`);
       }
 
       const data = await response.json();
 
-      // destructure to get results
-      const { results } = data;
-      const editedResults = results.map((res) => {
-        return {
-          id: res.episode_id,
-          title: res.title,
-          openingText: res.opening_crawl,
-          releaseDate: res.release_date,
-        };
-      });
+      const results = [];
+      for (const [MovieId, MovieData] of Object.entries(data)) {
+        results.push({
+          id: MovieId,
+          title: MovieData.title,
+          openingText: MovieData.openingText,
+          releaseDate: MovieData.releaseDate,
+        });
+      }
+      console.log(results);
+      setMovies(results);
 
-      //update state
-      setMovies(editedResults);
+      //- (star wars api)
+      // destructure to get results
+      // const { results } = data;
+      // const editedResults = results.map((res) => {
+      //   return {
+      //     id: res.episode_id,
+      //     title: res.title,
+      //     openingText: res.opening_crawl,
+      //     releaseDate: res.release_date,
+      //   };
+      // });
+      //- update state (star wars api)
+      // setMovies(editedResults);
     } catch (err) {
       setError(`💥💥 ${err.message}`);
       // console.error(`💥💥 ${err}`);
@@ -77,9 +93,18 @@ function App() {
     }
   }
 
-  function addMovieHandler(movie) {
-    console.log(movie);
-  }
+  const addMovieHandler = async (movie) => {
+    // NB the default request type for the fetch api is GET
+    // NB but you can add parameters to make it a POST request
+    const response = await fetch(firebaseAPIurlDB, {
+      method: "POST",
+      body: JSON.stringify(movie), //NB this is because the body does not want a javascript object but JSON data
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+  };
 
   return (
     <React.Fragment>

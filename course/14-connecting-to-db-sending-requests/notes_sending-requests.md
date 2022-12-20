@@ -22,3 +22,6 @@ This is a REST API, and it simply means that there are a couple of URLs, like th
 
 # HTTP Status codes
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+
+# Setting up Firebase
+For practicing POST request, we will create a mock backend with Firebase. The url defined as REACT_APP_URL_FIREBASE_API in env.local is an URL to some Firebase REST API, which takes the incoming request and talks to a database behind the scenes. On the Firebase website, it only looks like we are talkking directly to a database: we are not directly talking to a DB, we are talking to a backend which will send the reques to a DB. We can use this URL to send data to our Firebase backend and therefore to our database.
