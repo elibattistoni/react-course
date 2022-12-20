@@ -8,16 +8,17 @@ import "./App.css";
 function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const fetchMoviesHandler = async () => {
     setIsLoading(true);
+    setError(null); // to make sure that any previous error is cleared
     try {
       // the default method is get, therefore no need to specify it
       const response = await fetch("https://swapi.py4e.com/api/films");
-      if (!response.ok)
-        throw Error(
-          `Error during fetch: ${response.status}, ${response.statusText}`
-        );
+      if (!response.ok) {
+        throw Error(`${response.status} Error during fetch`);
+      }
 
       const data = await response.json();
 
@@ -34,10 +35,12 @@ function App() {
 
       //update state
       setMovies(editedResults);
-      setIsLoading(false);
     } catch (err) {
-      console.error(`💥💥💥 ${err}`);
+      setError(`💥💥 ${err.message}`);
+      // console.error(`💥💥 ${err}`);
     }
+    // set back loading to false regardless of whether getting the data was successful or not
+    setIsLoading(false);
   };
 
   return (
@@ -47,8 +50,11 @@ function App() {
       </section>
       <section>
         {isLoading && <Spinner />}
-        {!isLoading && movies.length > 0 && <MoviesList movies={movies} />}
-        {!isLoading && movies.length === 0 && <p>No movies found.</p>}
+        {!isLoading && error && <p>{error}</p>}
+        {!isLoading && !error && movies.length > 0 && (
+          <MoviesList movies={movies} />
+        )}
+        {!isLoading && !error && movies.length === 0 && <p>No movies found.</p>}
       </section>
     </React.Fragment>
   );

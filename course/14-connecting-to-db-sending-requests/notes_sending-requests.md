@@ -19,3 +19,6 @@ This is a REST API, and it simply means that there are a couple of URLs, like th
 # How to send requests in React
 - you can use a library called **axios**, which makes sending HTTP requests very simple (no matter which Javascript library you might be using -- you can use it without any library);
 - nowadays, we also have a built-in mechanism for sending HTTP requests from inside Javascript, and this is the **Fetch API**: the fetch api is built into browsers and it allows us to fetch data (and also to send data!!); and we can use it to send HTTP requests and work with responses.
+
+# HTTP Status codes
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
