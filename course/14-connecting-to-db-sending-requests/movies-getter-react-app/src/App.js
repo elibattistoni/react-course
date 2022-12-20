@@ -58,6 +58,11 @@ function App() {
   //| so this is how we can leverage useEffect to make sure that we send an HTTP request immediately when a component loads and not just when a button is clicked
   //| importantly this can also be extended to send HTTP request when other things change
   //| and we also ensured that the HTTP request really runs when it needs to run but not when it does not need to run
+  // NB useCallback() is a hook that allows us to store a function across component executions:
+  // - it allows us to tell React that we want to save a function and that this function should not be recreated with every execution
+  // - with this, the comparison work because only one function value is stored in memory
+  // NB so if we know for certain that a function never changes, we can useCallback to store it
+  // NB like with useEffect, useCallback wants a second argument: an array of dependencies
 
   let content;
   if (isLoading) {
