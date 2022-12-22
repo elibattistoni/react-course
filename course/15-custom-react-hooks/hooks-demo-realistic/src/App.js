@@ -42,21 +42,24 @@ function App() {
   }, []);
   */
 
-  const transformTasks = useCallback((data) => {
-    const loadedTasks = [];
-    for (const taskKey in data) {
-      loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-    }
-    setTasks(loadedTasks);
-  }, []);
-
   // call custom hook
-  const { isLoading, error, sendRequest: fetchTasks } = useHttp(transformTasks);
+  const { isLoading, error, sendRequest: fetchTasks } = useHttp();
 
   useEffect(() => {
-    fetchTasks({
-      url: "https://tasks-react-app-8d171-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
-    });
+    const transformTasks = (tasksObj) => {
+      const loadedTasks = [];
+      for (const taskKey in tasksObj) {
+        loadedTasks.push({ id: taskKey, text: tasksObj[taskKey].text });
+      }
+      setTasks(loadedTasks);
+    };
+
+    fetchTasks(
+      {
+        url: "https://tasks-react-app-8d171-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
+      },
+      transformTasks
+    );
   }, [fetchTasks]);
 
   const taskAddHandler = (task) => {
@@ -65,7 +68,7 @@ function App() {
 
   return (
     <React.Fragment>
-      {/*<NewTask onAddTask={taskAddHandler} />*/}
+      <NewTask onAddTask={taskAddHandler} />
       <Tasks
         items={tasks}
         loading={isLoading}
