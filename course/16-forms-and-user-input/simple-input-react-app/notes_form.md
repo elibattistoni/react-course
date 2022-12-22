@@ -15,3 +15,5 @@ In reality you use one of these two methods, not both together (in SimpleInput.j
 NB cfr SimpleInput.js!!
 
 ## IMPORTANT STEP 2: FORM VALIDATION
+Client-side validation (i.e. front-end validation, where we validate in the browser) is great for user experience because you give the user a dirct feedback, but you should always also validate the input on the server (i.e. implement server-side validation) because the client-side code can be edited by the users (anyone can dive into the source code and change the raw JS code).
+So the front-end validation is not a security mechanism, it is simply a tool for achieving a good user experience. Read this: https://academind.com/tutorials/hide-javascript-code .
