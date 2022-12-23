@@ -1,9 +1,17 @@
-import SimpleInput from './components/SimpleInput';
+import SimpleInput from "./components/SimpleInput";
+import BasicForm from "./components/BasicForm";
+import BasicFormAssignment from "./components/BasicFormAssignment";
 
 function App() {
   return (
     <div className="app">
-      <SimpleInput />
+      {/* TODO uncomment to see it work */}
+      {/* <SimpleInput /> */}
+
+      <BasicForm />
+
+      {/* TODO uncomment to make the assignments */}
+      {/* <BasicFormAssignment /> */}
     </div>
   );
 }
