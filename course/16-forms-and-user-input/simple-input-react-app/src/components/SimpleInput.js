@@ -20,7 +20,14 @@ const SimpleInput = (props) => {
   //| --------------------------------------------------------------------------
   //| VALIDATION FEEDBACK
   //| --------------------------------------------------------------------------
-  const [nameIsValid, setNameIsValid] = useState(true);
+  // const [nameIsValid, setNameIsValid] = useState(true); // NOT BEST PRACTICE
+  const [nameIsValid, setNameIsValid] = useState(false); // THIS IS BETTER! BEST PRACTICE
+  //NB this is a downside: we initially set this state to true just because we don't want to show the error message
+  //NB so we treat the initial input as valid eve though it is not
+  //NB there is also the proble that if you run a useEffect which sends an http request if the name is valid, then it sends it at the beginning, even though the name is not valid
+  //NB so we can add another state:
+  const [nameIsTouched, setNameIsTouched] = useState(false);
+  // with this we can control whether the user has already added the entered name input field
 
   //| --------------------------------------------------------------------------
   //| FORM SUBMISSION HANDLER
@@ -28,6 +35,9 @@ const SimpleInput = (props) => {
   const formSubmissionHandler = (e) => {
     // prevent default of sending http request to browser & reload page (and restart app): instead do nothing
     e.preventDefault();
+
+    // NB we can assume that all inputs have been touched if the user clicks on Submit
+    setNameIsTouched(true);
 
     //| ------------------------------------------------------------------------
     //| FORM VALIDATION
@@ -69,10 +79,16 @@ const SimpleInput = (props) => {
     nameInputRef.current.value = ""; // NB NOT IDEAL!!!!! DO NOT MANIPULATE THE DOM!!
   };
 
+  // create a const which is true if the name is invalid after typing something
+  const nameIsInvalidAfterTouching = nameIsTouched && !nameIsValid;
+  console.log(nameIsInvalidAfterTouching);
+
   return (
     <form onSubmit={formSubmissionHandler}>
       <div
-        className={`${nameIsValid ? "form-control" : "form-control invalid"}`}
+        className={`${
+          nameIsInvalidAfterTouching ? "form-control invalid" : "form-control"
+        }`}
       >
         <label htmlFor="name">Your Name</label>
         <input
@@ -82,7 +98,9 @@ const SimpleInput = (props) => {
           value={enteredName}
           ref={nameInputRef}
         />
-        {!nameIsValid && <p className="error-text">Name must not be empty</p>}
+        {nameIsInvalidAfterTouching && (
+          <p className="error-text">Name must not be empty</p>
+        )}
       </div>
       <div className="form-actions">
         <button>Submit</button>
