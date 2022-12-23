@@ -17,6 +17,12 @@ const SimpleInput = (props) => {
   //| UPDATE STATE set value of enteredName on every keystroke
   const nameInputChangeHandler = (e) => {
     setEnteredName(e.target.value);
+
+    // not set to true as soon as there is valid input
+    // remember that if you here use "enteredName" that state snapshot might not be updated
+    if (e.target.value.trim() != "") {
+      setNameIsValid(true);
+    }
   };
 
   // NB perform validation when input loses focus (i.e. on blur)

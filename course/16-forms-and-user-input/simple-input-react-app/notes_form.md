@@ -23,5 +23,5 @@ So the front-end validation is not a security mechanism, it is simply a tool for
 
 
 # SUMMARY:
-1. Validate when input loses focus and on form submission
+1. Validate when input loses focus and on form submission (should be used in combination -- you might click on the Submit button without losing focus of a specific input)
 2. If not valid, then when the user starts typing, validate on every keystroke (we want to give the user immediate, direct feedback on every keystroke when it comes to fixing the value)
