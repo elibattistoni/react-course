@@ -28,3 +28,7 @@ So the front-end validation is not a security mechanism, it is simply a tool for
 
 
 TODO IMPORTANT: in BasicFormAssignment.js add validation creating you own custom hook
+
+Formik: very popular library for working with forms
+
+IMPORTANT create a custom useForm hook https://academind.com/tutorials/reactjs-a-custom-useform-hook
