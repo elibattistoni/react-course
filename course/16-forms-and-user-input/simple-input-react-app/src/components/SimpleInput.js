@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // IMPORTANT With that, we have a relatively lean component here,
 /// which manages the input value and the touched state, and then derives to validity from those states.
@@ -8,16 +8,29 @@ import { useState } from "react";
 const SimpleInput = (props) => {
   //| FETCHING THE INPUT - BEST PRACTICE FOR CLEARING FIELDS --> on every keystroke
   const [enteredName, setEnteredName] = useState("");
-
   //| VALIDATION FEEDBACK
   const [nameIsTouched, setNameIsTouched] = useState(false);
   // with this we can control whether the user has already added the entered name input field
-
   // NB we can derive the validity of the name input from the enteredName and the nameIsTouched states:
   // NB since the component re-executes whenever one of its states changes, then this constant will always be up to date
   const nameIsValid = enteredName.trim() !== ""; // with this trick we do not need to handle the state of validity
   // create a const which is true if the name is invalid after typing something
   const nameIsInvalidAfterTouching = nameIsTouched && !nameIsValid;
+
+  /// IMPORTANT: overall form state: run the effect whenever one of the input changes
+  // there should be one depenency for each form field
+  // e.g. nameIsValid, ageIsValid, fiscalCodeIsValid,...
+  // so this effect, which evaluates the overall form state, runs when the component is first rendered and when one iunput changes
+  // and you can use this state (formIsValid) to disable/enable the submit button
+  // const [formIsValid, setFormIsValid] = useState(false);
+  // useEffect(() => {
+  //   if (nameIsValid) setFormIsValid(true);
+  //   else setFormIsValid(false);
+  // }, [nameIsValid]);
+  // you could do this with use effect, but it does not add anything valuable
+  //| best practice:
+  let formIsValid = false;
+  if (nameIsValid) formIsValid = true;
 
   //| UPDATE STATE set value of enteredName on every keystroke
   const nameInputChangeHandler = (e) => {
@@ -65,7 +78,7 @@ const SimpleInput = (props) => {
         )}
       </div>
       <div className="form-actions">
-        <button>Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
