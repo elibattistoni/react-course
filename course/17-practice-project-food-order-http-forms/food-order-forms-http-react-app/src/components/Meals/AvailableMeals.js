@@ -14,7 +14,7 @@ const AvailableMeals = () => {
   const firebaseAPIurlDB = `${process.env.REACT_APP_URL_FIREBASE_API}${process.env.REACT_APP_FIREBASE_TABLE}`;
 
   //| function for loading the meals
-  const fetchMealsHandler = useCallback(async () => {
+  const fetchMealsHandler = async () => {
     setIsLoading(true);
     setError(null); // to make sure that previous error is cleaned
     try {
@@ -39,9 +39,10 @@ const AvailableMeals = () => {
     }
 
     setIsLoading(false);
-  }, []);
+  };
 
   //| send request and load meals immediately when page is loaded and component is rendered for the first time
+  //NB the effect function should never de asynchronous! (it never should return a promise) the function that you call inside the effect, can be async
   useEffect(() => {
     fetchMealsHandler();
   }, []);
