@@ -4,3 +4,9 @@
   border-radius: 14px;
   background-color: white;
 }
+
+.card--center-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
