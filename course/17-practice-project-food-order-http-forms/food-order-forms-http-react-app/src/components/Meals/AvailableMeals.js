@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 const AvailableMeals = () => {
   //| set states
   const [meals, setMeals] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   //| set request url
@@ -15,7 +15,6 @@ const AvailableMeals = () => {
 
   //| function for loading the meals
   const fetchMealsHandler = async () => {
-    setIsLoading(true);
     setError(null); // to make sure that previous error is cleaned
     try {
       const response = await fetch(firebaseAPIurlDB);
