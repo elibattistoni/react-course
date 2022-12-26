@@ -23,11 +23,15 @@ const redux = require("redux");
 //| 1) for specific input values, it will return the exact same output values;
 //| 2) it shouyld not have any side effect inside (e.g. you should not send HTTP requests, save or retrieve something from the local storage)
 const counterReducer = (currentState = { counter: 0 }, action) => {
-  // IMPORTANT the first time that this function executes, it has no state, so we should give the currentState a defualt value that is used only the first time it runs
-  /// for the following executions, it will have a currentState (therefore the default state will not be used)
-  return {
-    counter: currentState.counter + 1,
-  };
+  //| IMPORTANT the first time that this function executes, it has no state, so we should give the currentState a defualt value that is used only the first time it runs
+  //| for the following executions, it will have a currentState (therefore the default state will not be used)
+
+  //| typically when using Redux, the goal is to do different things inside of the reducer for different actions
+  if (action.type === "increment") return { counter: currentState.counter + 1 };
+  if (action.type === "decrement") return { counter: currentState.counter - 1 };
+
+  // if the action type is not INCREMENT (e.g. for the initialization), then we return the initial state
+  return currentState;
 };
 
 //NB 3. create store and pass the reducer function to the create store function, because the stopre needs to know which reducer is responsible for changing the store
@@ -51,4 +55,7 @@ store.subscribe(counterSubscriber);
 //NB 6. create and dispatch action
 //| the input argument is a JS object with a type property
 //| and the value of this property is a unique string (each dispatch aciton should have a different string and be unique NB each styring leads to different actions in the reducer)
-store.dispatch({ type: "INCREMENT" });
+store.dispatch({ type: "increment" });
+store.dispatch({ type: "decrement" });
+
+//NB you can use Redux in any JavaScript project! it is not a library restricted to React
