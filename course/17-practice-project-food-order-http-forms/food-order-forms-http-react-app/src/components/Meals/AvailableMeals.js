@@ -2,7 +2,7 @@ import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 import Spinner from "../UI/Spinner";
 import classes from "./AvailableMeals.module.css";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const AvailableMeals = () => {
   //| set states
@@ -11,7 +11,7 @@ const AvailableMeals = () => {
   const [error, setError] = useState(null);
 
   //| set request url
-  const firebaseAPIurlDB = `${process.env.REACT_APP_URL_FIREBASE_API}${process.env.REACT_APP_FIREBASE_TABLE}`;
+  const firebaseAPIurlDB = `${process.env.REACT_APP_URL_FIREBASE_API}${process.env.REACT_APP_FIREBASE_MEALS_TABLE}`;
 
   //| function for loading the meals
   const fetchMealsHandler = async () => {
