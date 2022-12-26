@@ -5,8 +5,10 @@ import { counterActions } from "../store";
 
 const Counter = () => {
   const dispatch = useDispatch();
-  const counter = useSelector((state) => state.counter);
-  const show = useSelector((state) => state.showCounter);
+  //| we update the following state.counter with state.counter.counter because
+  //| now we are using multiple state slices and in the store we have the ones referred to the counter at state.counter
+  const counter = useSelector((state) => state.counter.counter);
+  const show = useSelector((state) => state.counter.showCounter);
 
   const incrementHandler = () => {
     dispatch(counterActions.increment());
