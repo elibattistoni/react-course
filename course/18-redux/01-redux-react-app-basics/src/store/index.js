@@ -1,6 +1,6 @@
 import { createStore } from "redux";
 
-const initialState = { counter: 0, amount: 1, showCounter: true };
+const initialState = { counter: 0, showCounter: true };
 
 //% CREATE REDUCER FUNCTION
 const counterReducer = (currentState = initialState, action) => {
@@ -15,21 +15,18 @@ const counterReducer = (currentState = initialState, action) => {
     //NB do not do this: currentState.counter++ and then return currentState
     return {
       counter: currentState.counter + currentState.amount,
-      amount: currentState.amount,
       showCounter: currentState.showCounter,
     };
 
   if (action.type === "decrement")
     return {
       counter: currentState.counter - currentState.amount,
-      amount: currentState.amount,
       showCounter: currentState.showCounter,
     };
 
   if (action.type === "toggle")
     return {
       counter: currentState.counter,
-      amount: currentState.amount,
       showCounter: !currentState.showCounter,
     };
 
