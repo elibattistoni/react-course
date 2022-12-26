@@ -1,5 +1,9 @@
 import classes from "./Counter.module.css";
 
+// IMPORTANT NOTE: here we are accessing the redux state for a small applications: in reality it would not be necessary
+/// everything here could be managed with use State
+// but this is just a demo to learn React-Redux
+
 //| REDUX
 import { useSelector, useDispatch } from "react-redux";
 //| this is to get access, to listen to the store
@@ -19,6 +23,8 @@ const Counter = () => {
     (currentState) => currentState.counter
   );
 
+  const show = useSelector((currentState) => currentState.showCounter);
+
   //| REDUX --> DISPATCH ACTION
   const dispatch = useDispatch();
   const incrementHandler = () => {
@@ -30,16 +36,25 @@ const Counter = () => {
     dispatch({ type: "decrement", amount: 5 });
   };
 
+  //| this function should toggle the visibility of the counter (assume that the visibility of the counter is a state that is interesting for other components too)
+  const toggleCounterHandler = () => {
+    //| inside this function we want to dispatch an action to the reducer (this function in the reducer should control whether this counter div is shown or not)
+    dispatch({ type: "toggle" });
+  };
+
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>
-        COUNTER VALUE: {counterInCentralDataStore}
-      </div>
+      {show && (
+        <div className={classes.value}>
+          COUNTER VALUE: {counterInCentralDataStore}
+        </div>
+      )}
       <div>
         <button onClick={incrementHandler}>Increment</button>
         <button onClick={decrementHandler}>Decrement</button>
       </div>
+      <button onClick={toggleCounterHandler}>Toggle Counter</button>
     </main>
   );
 };
