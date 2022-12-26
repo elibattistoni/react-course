@@ -22,10 +22,12 @@ const Counter = () => {
   //| REDUX --> DISPATCH ACTION
   const dispatch = useDispatch();
   const incrementHandler = () => {
-    dispatch({ type: "increment" });
+    // dispatch({ type: "increment" }); // this is without a value
+    dispatch({ type: "increment", amount: 5 });
   };
   const decrementHandler = () => {
-    dispatch({ type: "decrement" });
+    // dispatch({ type: "decrement" });
+    dispatch({ type: "decrement", amount: 5 });
   };
 
   return (
