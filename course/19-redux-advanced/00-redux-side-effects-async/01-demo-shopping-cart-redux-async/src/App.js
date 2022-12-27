@@ -7,7 +7,10 @@ import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
 import Notification from "./components/UI/Notification";
-import { sendCartDataActionCreator } from "./store/cart-slice";
+import {
+  sendCartDataActionCreator,
+  retrieveCartDataActionCreator,
+} from "./store/cart-actions";
 
 let isInitial = true;
 
@@ -71,8 +74,13 @@ function App() {
       return;
     }
 
-    dispatch(sendCartDataActionCreator(cart));
+    if (cart.changed) dispatch(sendCartDataActionCreator(cart));
   }, [cart, dispatch]);
+
+  //% for retrieving data from the DB
+  useEffect(() => {
+    dispatch(retrieveCartDataActionCreator());
+  }, [dispatch]); // basically no dependencies tso it will run only when the page loads (when the component is rendered)
 
   return (
     <Fragment>
