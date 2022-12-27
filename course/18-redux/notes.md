@@ -68,3 +68,6 @@ We have actions, and components dispatch actions (i.e. components trigger certai
 --------------------------------------------------------------------------------
 ## Redux Toolkit
 this is a library that simplifies working with Redux
+
+
+IMPORTANT install Redux DevTools!
