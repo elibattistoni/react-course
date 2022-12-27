@@ -18,6 +18,8 @@ const ProductItem = (props) => {
     );
   };
 
+  //% SEND DATA TO DATABASE
+
   return (
     <li className={classes.item}>
       <Card>

@@ -12,6 +12,7 @@ const cartSlice = createSlice({
   },
   reducers: {
     addItemToCart(state, action) {
+      //% VERY IMPORTANT: NEVER HAVE A SIDE EFFECT (e.g. HTTP REQUEST) INSIDE OF A REDUCER! THEY MUST BE SYNCHRONOUS AND SIDE-EFFECT FREE!!
       const newItem = action.payload;
       // check if item already exists
       const existingItem = state.items.find((item) => item.id === newItem.id);
