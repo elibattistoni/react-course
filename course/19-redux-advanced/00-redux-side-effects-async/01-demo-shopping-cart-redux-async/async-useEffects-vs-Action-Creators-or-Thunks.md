@@ -1,0 +1,7 @@
+# Which logic and where to use it when you have asynchronous code in react-redux
+
+## 1) Async with useEffect (cfr App_asyncWithuseEffect.js)
+1. inside the components, using **useEffect()** (see **App_asyncWithuseEffect.js**) --> NOTE that we use action creators all the time, even inside the useEffect function: .showNotification() is an action creator, and we get this automatically from redux toolkit; we call these action creators to create action objects that we dispatch; these are automatically generated creators, but we can also write our own creators to create the **thunks**
+   
+## 1) Async with Action Creators (Thunks) (cfr App.js + sendCartDataActionCreator function in cart-slice.js)
+2. inside the **action creators** --> we can write our own action creators to create "thunks" --> **a thunk is a function that delays an action until something else has finished** (an we could write an action creator as a thunk!) --> **a thunk is an action creator function that does NOT return the action itself but another function which eventually returns the action**, so that we can run some other code before we then dispatch the actual action object that we wanted to create. --> it is very easy to implement!!!
