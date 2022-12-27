@@ -1,14 +1,13 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
-import { cartActions } from '../../store/cart-slice';
-import Card from '../UI/Card';
-import classes from './ProductItem.module.css';
+import { cartActions } from "../../store/cart-slice";
+import Card from "../UI/Card";
+import classes from "./ProductItem.module.css";
 
 const ProductItem = (props) => {
+  //% wire the add-to-cart-button with the action in the cart-slice reducer
   const dispatch = useDispatch();
-
   const { title, price, description, id } = props;
-
   const addToCartHandler = () => {
     dispatch(
       cartActions.addItemToCart({
