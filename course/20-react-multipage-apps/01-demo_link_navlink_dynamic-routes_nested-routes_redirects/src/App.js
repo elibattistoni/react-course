@@ -1,8 +1,11 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 //% NB the Switch component allows you to not have multiple pages on the screen
 //% simultaneously (see below) and NB the first route that matched
 //% (if it matches the start of a path, not the entire path) will be displayed
 //% NB add the prop "exact" to make it truly match
+
+//% the Redirect component allows us to redirect a user to a specific page
+
 import MainHeader from "./components/MainHeader";
 import ProductDetail from "./pages/ProductDetail";
 import Products from "./pages/Products";
@@ -13,10 +16,12 @@ function App() {
     <div>
       <MainHeader />
       <main>
+        {/* //% SWITCH for displaying a single route */}
         <Switch>
           <Route path="/welcome">
             <Welcome />
           </Route>
+
           <Route path="/products" exact>
             <Products />
           </Route>
@@ -31,6 +36,11 @@ function App() {
           */}
           <Route path="/products/:productId">
             <ProductDetail />
+          </Route>
+
+          {/* //% REDIRECTING */}
+          <Route path="/" exact>
+            <Redirect to="/welcome" />
           </Route>
         </Switch>
       </main>
