@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Route, useParams } from "react-router-dom";
+import { Link, Route, useParams } from "react-router-dom";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import Comments from "../components/comments/Comments";
 
@@ -21,7 +21,18 @@ const QuoteDetail = (props) => {
         <h1>Quote Detail Page</h1>
         <p>{params.quoteId}</p
       */}
+      {/* 
+      //% here we use React Router to conditionally render different content
+      //% based on the URL without having to manage some complex state!!
+      */}
       <HighlightedQuote text={quote.text} author={quote.author} />
+      <Route path={`/quotes/${params.quoteId}`} exact>
+        <div className="centered">
+          <Link to={`/quotes/${params.quoteId}/comments`} className="btn--flat">
+            Load Comments
+          </Link>
+        </div>
+      </Route>
 
       {/*
         //% DYNAMIC PATH
