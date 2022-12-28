@@ -36,3 +36,5 @@
   padding-bottom: 0.25rem;
   border-bottom: 4px solid #95bcf0;
 }
+
+/* NB .header a.active is set so that you can use activeClassName as prop in the NavLink component in the JSX */
