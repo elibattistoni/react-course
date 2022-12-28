@@ -39,7 +39,22 @@ const QuoteList = (props) => {
     //| remember that here we user ?sort= .. but sort is not mandatory, it can be another value
     //| sort will be the key that holds our sorting information
     //| and we will set a dynamic value that we derive from our current state of order
-    history.push(`/quotes?sort=${isSortingAscending ? "desc" : "asc"}`); //NB this will become dinamic
+    //| important react router allows us to use an alternative description of the
+    //| destination a link should lead to or where programmatic navigation should lead to
+    //| you can also pass an object that describes the target destination
+    //| so if you have more complex URLs you want to navigate to
+    // React Router: different ways to specify paths
+    history.push({
+      pathname: location.pathname,
+      search: `?sort=${isSortingAscending ? "desc" : "asc"}`,
+    });
+    /*
+    ALTERNATIVE 2
+    history.push(
+      `${location.pathname}?sort=${isSortingAscending ? "desc" : "asc"}`
+    );
+    */
+
     //| 2. we want to read the query parameter value and act accordingly (i.e. change the sorting, change the button label,...-)
     //| read the query parameter values with useLocation() hook
   };
