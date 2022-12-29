@@ -1,5 +1,10 @@
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import QuoteForm from "../components/quotes/QuoteForm";
+
+//- for sending the post request
+import useHttp from "../hooks/use-http";
+import { addQuote } from "../lib/api";
 
 //% PROGRAMMATIC or IMPERATIVE NAVIGATION
 //| here we want to add PROGRAMMATIC (IMPERATIVE) NAVIGATION: after the form submission,
@@ -15,8 +20,16 @@ const NewQuote = (props) => {
   //| redirect after submitting the form
   const history = useHistory();
 
+  //- for sending the post request (we use stuff from api.js and use-http.js)
+  const { sendRequest, status } = useHttp(addQuote);
+  //- navigate away when the request is completed
+  useEffect(() => {
+    if (status === "completed") history.push("/quotes");
+  }, [status, history]); // but the history object will not actually change
+
   const addQuoteHandler = (quoteData) => {
-    //NB send this data to a server
+    //- send this data to a server
+    sendRequest(quoteData);
     console.log(quoteData);
 
     //| redirect
@@ -25,9 +38,12 @@ const NewQuote = (props) => {
     //| the replace method replaces the current page
     //| the difference is that with the push method we can go back with the back
     //| button to the page we are coming from, whereas with replace we cannot
-    history.push("/quotes"); //| we will navigate away if we send the data
+    // history.push("/quotes"); //| we will navigate away if we send the data
+    //| we have moved this in useEffect
   };
-  return <QuoteForm onAddQuote={addQuoteHandler} />;
+  return (
+    <QuoteForm isLoading={status === "pending"} onAddQuote={addQuoteHandler} />
+  );
 };
 
 export default NewQuote;

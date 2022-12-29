@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
+// React Router useHistory, useLocation
 //% useHistory
 //| this hook allows us to change the page history, and therefore the URL
 //| and we can use this hook (and the history object it returns) to add QUERY PARAMETERS to the currently loaded page

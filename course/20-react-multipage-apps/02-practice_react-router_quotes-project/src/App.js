@@ -25,7 +25,7 @@ function App() {
           <NewQuote />
         </Route>
 
-        {/* any path that does not match the ones above, should render the not found page */}
+        {/* Reacr Router: Not Found page any path that does not match the ones above, should render the not found page */}
         <Route path="*">
           <NotFound />
         </Route>

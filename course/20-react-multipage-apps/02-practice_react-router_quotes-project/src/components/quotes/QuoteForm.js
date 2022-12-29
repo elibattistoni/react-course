@@ -7,6 +7,7 @@ import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import classes from "./QuoteForm.module.css";
 
+// React Router popup "do you really want to navigate away?"
 //% PROMPT: "DO YOU REALLY WANT TO NAVIGATE AWAY?" if accidentally the user clicks
 //% on back and tries to leave the page after they have started entereing something in the form
 //| 1. determine when the user starts working on the form: when the form gains focus
@@ -41,6 +42,7 @@ const QuoteForm = (props) => {
   return (
     <Fragment>
       {/*
+        React Router Prompt usage
         Prompt needs 2 props:
         1) when: true or false --> to set whether this prompt should be shown if the user changes the URL or not
         2) message: a function that returns a message (an the input argument is the location i.e. the page you want to go to)
