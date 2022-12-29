@@ -1,12 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Link, Route, useParams, useRouteMatch } from "react-router-dom";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import Comments from "../components/comments/Comments";
-
-const DUMMY_QUOTES = [
-  { id: "q1", author: "Max", text: "Learning React is fun" },
-  { id: "q2", author: "Elisa", text: "Learning React is great" },
-];
+import useHttp from "../hooks/use-http";
+import { getSingleQuote } from "../lib/api";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 /*
 React Router: create nested paths dynamically with useRouteMatch
@@ -21,13 +19,37 @@ React Router: create nested paths dynamically with useRouteMatch
 */
 const QuoteDetail = (props) => {
   const match = useRouteMatch();
-  console.log(match); //NB we can use this match object to create the nested paths dynamically!
+  // console.log(match); //NB we can use this match object to create the nested paths dynamically!
 
   const params = useParams();
+  const { quoteId } = params;
+  // we neede the code below when we had the dummy data, before getting the data with an http request to firebase
+  // const quote = DUMMY_QUOTES.find((q) => q.id === params.quoteId);
 
-  const quote = DUMMY_QUOTES.find((q) => q.id === params.quoteId);
+  const {
+    sendRequest,
+    status,
+    data: loadedQuote,
+    error,
+  } = useHttp(getSingleQuote, true);
 
-  if (!quote) return <p>No quote found!</p>;
+  useEffect(() => {
+    sendRequest(quoteId);
+  }, [sendRequest, quoteId]);
+
+  // show spinner if status is pending
+  if (status === "pending") {
+    return (
+      <div className="centered">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  // display error
+  if (error) return <p className="centered focused">{error}</p>;
+
+  if (!loadedQuote.text) return <p>No quote found!</p>;
 
   return (
     <Fragment>
@@ -40,7 +62,7 @@ const QuoteDetail = (props) => {
       //% here we use React Router to conditionally render different content
       //% based on the URL without having to manage some complex state!!
       */}
-      <HighlightedQuote text={quote.text} author={quote.author} />
+      <HighlightedQuote text={loadedQuote.text} author={loadedQuote.author} />
       {/* NB not dynamically generated: path={`/quotes/${params.quoteId}`} */}
       <Route path={match.path} exact>
         <div className="centered">

@@ -31,7 +31,6 @@ const QuoteForm = (props) => {
 
   const formFocusHandler = () => {
     //| this function is needed to determine when the user starts working on the form
-    console.log("FOCUS!");
     setIsFormFocused(true);
   };
 

@@ -30,7 +30,6 @@ const NewQuote = (props) => {
   const addQuoteHandler = (quoteData) => {
     //- send this data to a server
     sendRequest(quoteData);
-    console.log(quoteData);
 
     //| redirect
     //| the push method pushes a new page on the stack of the pages, i.e. a new
