@@ -8,6 +8,7 @@ function RootLayout() {
       <MainNavigation />
       <main>
         <Outlet />
+        {/* the outlet component marks the place where all the nested child components should be rendered to */}
       </main>
     </>
   );
