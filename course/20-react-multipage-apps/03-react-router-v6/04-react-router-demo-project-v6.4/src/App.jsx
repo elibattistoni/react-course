@@ -18,7 +18,12 @@ const router = createBrowserRouter(
     // NB no more Routes parent component, but only Route component!
     // NB and the parent Route component must render the RootLayout component
     <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />}>
-        {/* //% all the following components will be rendered inside the RootLayout component (the place where they should be inserted is indicated by the Outlet component in RootLayout ) */}
+        {/* //% all the following components will be rendered inside the RootLayout
+        //% component (the place where they should be inserted is indicated by the Outlet component in RootLayout ) */}
+
+        {/* //% about errors: you can use the errorElement prop and an error component 
+        //% on the parent element as the fallback component if an error occurs anywhere in your route definition,
+        //% because errors will bubble up through your route definitions and the first route with an errorElement will render its errorElement */}
       <Route index element={<WelcomePage />} />
       {/* NB index stands for path="/" basically */}
       <Route path="/blog" element={<BlogLayout />}>

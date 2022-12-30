@@ -5,7 +5,7 @@ import classes from './NewsletterSignup.module.css';
 
 function NewsletterSignup() {
   const emailEl = useRef();
-  const fetcher = useFetcher();
+  const fetcher = useFetcher(); // this hook can be used to manually trigger form submission or build a form using fetcher.Form (ideal for pages where you want to send requests without switching the page)
 
   function signupForNewsletterHandler(event) {
     event.preventDefault();
