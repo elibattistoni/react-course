@@ -25,3 +25,8 @@ We will use Firebase also for authentication: if you have a firebase project, th
 https://firebase.google.com/docs/reference/rest/auth
 
 Create a project, and then go to "Authentication" menu
+
+### Persisting authenticated status
+Browsers have storage mechanisms that we can use, e.g. cookies, an alternative is local storage. Read this https://academind.com/tutorials/localstorage-vs-cookies-xss
+
+In our case, local storage is fine; it is only a problem is your page is vulnerable to cross-site scripting attacks (but this would mean that you have also other problems as well)

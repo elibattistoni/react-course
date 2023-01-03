@@ -1,5 +1,6 @@
 import { useState, useRef, useContext } from "react";
 import AuthContext from "../../store/auth-context";
+import { useHistory } from "react-router-dom";
 
 import classes from "./AuthForm.module.css";
 
@@ -8,6 +9,8 @@ import { API_KEY } from "./apikey";
 const AuthForm = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+
+  const history = useHistory();
 
   // tap into context to change the state of the token
   const authCtx = useContext(AuthContext);
@@ -19,7 +22,7 @@ const AuthForm = () => {
     setIsLogin((prevState) => !prevState);
   };
 
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
 
     const enteredEmail = emailInputRef.current.value;
@@ -69,8 +72,13 @@ const AuthForm = () => {
       })
       .then((data) => {
         // successful request
-        console.log(data);
-        authCtx.login(data.idToken);
+
+        const expirationTime = new Date(
+          new Date().getTime() + +data.expiresIn * 1000
+        );
+        authCtx.login(data.idToken, expirationTime.toISOString());
+        // redirect the user
+        history.replace("/");
       })
       .catch((err) => {
         alert(err.message);
