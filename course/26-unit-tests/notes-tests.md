@@ -15,3 +15,4 @@ NB these tools are already set up for you when you work on a project created wit
 To run the tests that you write:
 `npm test` (script defined in package.json)
 it automatically looks for file that end with ".test.js"
+NB the convention is to write a test as close as possible to the component/script/file that you want to test
