@@ -32,4 +32,10 @@ That's all - as mentioned, this is the only change. Everything you learn in this
 Here we will see 2 approaches for managing state with React-only tools: one of those approaches is good, the other is not that great.
 
 ### Approach 1: React Context API
-Sometimes it is the right choice buyt not always
+Sometimes it is the right choice buyt not always.
+
+IMPORTANT Disadvantage: the Context API is good for low-frequency updates but not for high-frequency updates. e.g. user authentication status --> ok with context API; or themeing; but for example toggling the favorites is a relatively high frequency change, or managing a shopping cart --> the context API is not intended for managin all the state, but only some parts, the parts that change not often
+
+but for high frequency changes there is still a non-Redux alternative: with custom Hooks
+
+### Approach 2: React Custom Hooks
