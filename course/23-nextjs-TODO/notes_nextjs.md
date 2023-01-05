@@ -30,3 +30,7 @@ Ok to proceed? (y) y
 ## Contents of a NextJS project created with npx create-next-app
 In the public folder there is no "index.html" file which we usually find in React projects. The reason for this is that NextJS has the built-in pre-rendering: it still gives you a Single Page Application, but that single page is dynamically pre-rendered when a request reaches the server, so that you return an initial page with content. To be precise, NextJS allows us to determine WHEN a page should be pre-rendered (but we are going to learn this step by step).
 NB The pages folder is the most important one, because in this folder we will set up the file-based routing for defining the different pages that the application should have.
+
+the index.js file contains a standard react component
+
+## Start Development Server with `npm run dev`
