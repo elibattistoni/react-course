@@ -13,3 +13,20 @@ with NextJS, after this initial load offered as initial request, we still get a 
 React Router is a great package, but it is extra code which you have to write. And then often you end up storing your components that act as pages in a separate folder, which kind of replicates your route set up in code.
 with NextJS, you would define pages and routes with files and folders. You have a special pages folder in NextJS apps which has to be named pages, and then you are structuring that folder, defines the routes and paths  our page supports.
 3. **Build Fullstack Apps** NextJS also makes it easy for us as a developer to add backend code to our react project. So to build a full stack react project, where we don't just have the client side code maybe with server-side pre-rendering, but where we also have standalone backend code, that for example, works with the file system or reaches out to a database. With NextJS it's very easy to add our own backend API into our react project using NodeJS code. So we can easily add such code to our Next react apps when using NextJS. That's easy to add with NextJS, we can stay in one project, we have to know some NodeJS code forded arguably, but we would have to know that anyways when we build our own backend, and then we don't have to build a standalone REST API project, but instead we can work on one project, our Next project, and add all the client's side code, our react user interface, and also blend in our backend API code. That's why NextJS is amazing.
+
+# Creating an NextJS project
+
+https://nextjs.org/
+
+npx create-next-app
+
+Need to install the following packages:
+  create-next-app@13.1.1
+Ok to proceed? (y) y
+✔ What is your project named? … first-nextjs-project
+✔ Would you like to use TypeScript with this project? … No / Yes
+✔ Would you like to use ESLint with this project? … No / Yes
+
+## Contents of a NextJS project created with npx create-next-app
+In the public folder there is no "index.html" file which we usually find in React projects. The reason for this is that NextJS has the built-in pre-rendering: it still gives you a Single Page Application, but that single page is dynamically pre-rendered when a request reaches the server, so that you return an initial page with content. To be precise, NextJS allows us to determine WHEN a page should be pre-rendered (but we are going to learn this step by step).
+NB The pages folder is the most important one, because in this folder we will set up the file-based routing for defining the different pages that the application should have.
