@@ -33,4 +33,12 @@ NB The pages folder is the most important one, because in this folder we will se
 
 the index.js file contains a standard react component
 
+NB path segments in the URL (e.g. /news) can be created in 2 ways: in the pages folder, you can have:
+- a news.js file --> **pages/index.js**
+- a news folder and inside of it, an index.js file --> **pages/news/index.js**
+and they will both point to: **our-domain.com/news**
+NB the option you choose matters when you want to create **nested paths**
+e.g. if you want to have: our-domain.com/news/news-id-details then you really need to have the news subfolder, inside of the pages folder
+and if you create .js files directly in the pages folder, then you are limited to have one segment only in the URL
+
 ## Start Development Server with `npm run dev`
