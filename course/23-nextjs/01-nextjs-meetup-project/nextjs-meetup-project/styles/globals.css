@@ -1,3 +1,4 @@
+/*
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -92,9 +93,9 @@ a {
     color-scheme: dark;
   }
 }
+*/
 
 
-/* 
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@400;700&display=swap');
 
 * {
@@ -103,6 +104,7 @@ a {
 
 body {
   font-family: 'Open Sans', 'Lato', sans-serif;
+  margin: 0
 }
 
 h1,
@@ -113,4 +115,3 @@ h5,
 h6 {
   font-family: 'Lato', sans-serif;
 }
-*/
