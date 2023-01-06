@@ -91,6 +91,8 @@ export async function getStaticProps() {
   //| NB getStaticProps is faster that regenerating and fetching data for every incoming request which we do with getServerSideProps
   //| (IMPORTANT your page will be faster when working with getStaticProps)
 
+  //| with getStaticProps you can take advantage of the caching and you do not regenerate the page mutliple times unnecessarily
+
   return {
     props: {
       meetups: DUMMY_MEETUPS,
@@ -99,7 +101,6 @@ export async function getStaticProps() {
   };
 }
 
-/*
 //% METHOD 2) SERVER-SIDE RENDERING
 export async function getServerSideProps(context) {
   //| the difference with getStaticProps is that this function will run not during
@@ -126,4 +127,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-*/
