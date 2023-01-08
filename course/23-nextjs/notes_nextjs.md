@@ -42,3 +42,22 @@ e.g. if you want to have: our-domain.com/news/news-id-details then you really ne
 and if you create .js files directly in the pages folder, then you are limited to have one segment only in the URL
 
 ## Start Development Server with `npm run dev`
+
+
+## Web pages pre-rendering
+- see index.js and [meetupId].js --> getStaticProps (and getStaticPaths), getServerSideProps to prepare the props to use in a page/component
+
+## API routes
+NextJS makes it easy for us to create a backend API, together with our frontend React app in the same project. for this we can use a NextJS feature called API routes.
+
+**API routes** are special routes, special pages that do not return HTML code, but instead they accept incoming HTTP requests (post, patch, put, delete) with JSON data attached to them, and that might do whatever you need to do, e.g. store data in a database and then return JSON data. --> API routes allow you to build your own API endpoints as part of a NextJS project, and they will be served by the same server as your Next app.
+
+In order to add API routes, you have to add a special folder named "api" in your "pages" folder; then NextJS will pick up the .js files stored in there and turn those files into API routes (the file names will act as path segments in the URL), i.e. turned into endpoints that can be targeted by requests and that should receive JSON and return JSON. NB in these files you define functions that contain server-side code (not components!!), because API routes will only run on the server (and never on the client; and the code in them will never be exposed to the client. so we can also use credentials in API routes, without compromising them --> and those functions are triggered whenever a request is sent to this route) ==> see pages/api/new-meetup.js
+
+# Before deploying: metadata
+One thing that you should always check in any kind of NextJS project, is **metadata**, which you might want to add to your pages
+- we have to add a description metatag, which allows you to set descriptions that e.g. show up on a Google search
+- page title (which becomes the tab title)
+- go to index.js and look at how it is done there
+
+# Deploy your NextJS application to Vercel TODO watch the video when you want to deploy your app

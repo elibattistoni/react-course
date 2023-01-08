@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
-import MeetupList from "../components/meetups/MeetupList";
+import Head from "next/head";
 
-const DUMMY_MEETUPS = [
-  {
-    id: "m1",
-    title: "First Meetup in Salzburg",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Salzburg_%2848489551981%29.jpg/1920px-Salzburg_%2848489551981%29.jpg",
-    address: "Salzburg, 5020 Austria",
-  },
-  {
-    id: "m2",
-    title: "Second Meetup in Salzburg",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Salzburg_%2848489551981%29.jpg/1920px-Salzburg_%2848489551981%29.jpg",
-    address: "Salzburg, 5020 Austria",
-  },
-];
+import { MongoClient } from "mongodb";
+//| NB when in a page component file you import something that is only used in getServerSideProps or getStaticProps,
+//| then the imported package will not be part of the client bundle (which is good both in terms of the size of the bundle and of security)
+
+import { username, password, dbTable } from "../settings-mongodb";
+
+import { Fragment, useEffect, useState } from "react";
+import MeetupList from "../components/meetups/MeetupList";
 
 export default function HomePage(props) {
   const [loadedMeetups, setLoadedMeetups] = useState([]);
@@ -51,11 +42,23 @@ export default function HomePage(props) {
 
   useEffect(() => {
     // send HTTP request and fetch data
-    setLoadedMeetups(DUMMY_MEETUPS);
+    // setLoadedMeetups(DUMMY_MEETUPS);
+    setLoadedMeetups(props.meetups);
   }, []);
 
   // return <MeetupList meetups={loadedMeetups}></MeetupList>;
-  return <MeetupList meetups={props.meetups}></MeetupList>;
+  return (
+    <Fragment>
+      <Head>
+        <title>React Meetups</title>
+        <meta
+          name="description"
+          content="Browse a huge list of highly active React meetups!"
+        />
+      </Head>
+      <MeetupList meetups={props.meetups}></MeetupList>
+    </Fragment>
+  );
 }
 
 //% METHOD 1) STATIC GENERATION
@@ -91,9 +94,24 @@ export async function getStaticProps() {
   //| NB getStaticProps is faster that regenerating and fetching data for every incoming request which we do with getServerSideProps
   //| (IMPORTANT your page will be faster when working with getStaticProps)
 
+  //% connect to MongoDB
+  const client = await MongoClient.connect(
+    `mongodb+srv://${username}:${password}@cluster0.ofhbk15.mongodb.net/${dbTable}?retryWrites=true&w=majority`
+  );
+  const db = client.db();
+  const meetupCollection = db.collection("meetups");
+  const meetups = await meetupCollection.find().toArray(); // this finds all the documents inside of the collection
+
+  client.close();
+
   return {
     props: {
-      meetups: DUMMY_MEETUPS,
+      meetups: meetups.map((meetup) => ({
+        title: meetup.title,
+        address: meetup.address,
+        image: meetup.image,
+        id: meetup._id.toString(),
+      })),
     },
     revalidate: 1,
   };
